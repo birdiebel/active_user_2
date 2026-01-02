@@ -8,6 +8,13 @@ class User < ApplicationRecord
     ["created_at", "email", "encrypted_password", "id", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "updated_at"]
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ["player"]
+  end
+
+  has_one :player
+  accepts_nested_attributes_for :player
+  
   enum :role, [:player, :admin]
 
 end
