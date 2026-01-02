@@ -14,7 +14,9 @@ class User < ApplicationRecord
 
   has_one :player
   accepts_nested_attributes_for :player
-  
+  validates :email, presence: true
+
+
   enum :role, [:player, :admin]
 
 end

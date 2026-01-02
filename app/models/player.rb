@@ -10,6 +10,9 @@ class Player < ApplicationRecord
 
     belongs_to :user, optional: true
 
+    validates :firstname, presence: true
+    validates :lastname, presence: true
+
     enum :sexe, [:Men, :Ladies]
     enum :lang, [:Fr, :Nl, :En]
 

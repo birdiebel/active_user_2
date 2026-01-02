@@ -9,7 +9,7 @@ ActiveAdmin.register User do
                 :password_confirmation, :encrypted_password, 
                 :reset_password_token, :reset_password_sent_at, 
                 :remember_created_at,
-                player_attributes: [:id, :firstname, :lastname]
+                player_attributes: [:id, :firstname, :lastname, :dob, :sexe, :lang]
   #
   # or
   #
@@ -21,12 +21,16 @@ ActiveAdmin.register User do
 
   includes :player
 
+  filter :email
+
   form title: 'User' do |f|
     f.inputs 'Details' do
       input :email
       input :role
-      input :password
-      input :password_confirmation
+      if f.object.new_record?
+        input :password
+        input :password_confirmation
+      end
     end
 
     f.inputs "Player", for: [:player, f.object.player || Player.new], new_record: false do |p|
@@ -64,7 +68,9 @@ ActiveAdmin.register User do
           end
       end
     else
-      h3 "No player"
+      h3 style: "color: red" do 
+        "No player"
+      end  
     end
 
   end

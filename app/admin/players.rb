@@ -19,9 +19,17 @@ ActiveAdmin.register Player do
 
   filter :lastname
 
+  index do 
+    selectable_column
+    id_column
+    column :firstname
+    column :lastname
+    actions
+  end
+
   form do |f|
     f.inputs 'Player informations' do
-      f.input :user_id, label: 'User', as: :select, collection: User.all.map { |u| ["#{u.id}, #{u.email}", u.id] }   
+      # f.input :user_id, label: 'User', as: :select, collection: User.all.map { |u| ["#{u.id}, #{u.email}", u.id] }   
       f.input :firstname
       f.input :lastname
       f.input :dob
@@ -30,5 +38,9 @@ ActiveAdmin.register Player do
     end
     f.actions
   end
+
+  # action_item :view do
+  #    p "cacaca"
+  # end
   
 end

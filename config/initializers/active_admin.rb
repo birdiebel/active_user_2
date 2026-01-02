@@ -347,5 +347,18 @@ ActiveAdmin.setup do |config|
   # By default, Active Admin uses Sprocket's asset pipeline.
   # You can switch to using Webpacker here.
   #
-  # config.use_webpacker = true
+  config.use_webpacker = false
+
+  config.batch_actions = true
+
+  # clear any previous assets
+  config.clear_javascripts!
+
+  # We need jQuery and jQuery UI and jQuery-ujs which are dependencies
+  config.register_javascript "https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"
+  config.register_javascript "https://cdn.jsdelivr.net/npm/jquery-ujs@1.2.3/src/rails.min.js"
+  config.register_javascript "https://cdn.jsdelivr.net/npm/jquery-ui@1.13.2/dist/jquery-ui.min.js"
+
+  # The actual active admin javascript file
+  config.register_javascript "https://cdn.jsdelivr.net/npm/@activeadmin/activeadmin@2.13.1/app/assets/javascripts/active_admin/base.min.js"
 end
