@@ -18,6 +18,7 @@ class Player < ApplicationRecord
     enum :lang, [:Fr, :Nl, :En]
 
     accepts_nested_attributes_for :licences
+    accepts_nested_attributes_for :user
 
 
     def full_name

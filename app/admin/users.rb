@@ -5,11 +5,12 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :role, :password, 
+  permit_params :id, :email, :role, :password, 
                 :password_confirmation, :encrypted_password, 
                 :reset_password_token, :reset_password_sent_at, 
                 :remember_created_at,
                 player_attributes: [:id, :firstname, :lastname, :dob, :sexe, :lang]
+
   #
   # or
   #
@@ -38,9 +39,8 @@ ActiveAdmin.register User do
         p.input :lastname
         p.input :dob
         p.input :sexe
-        p.input :lang        
-    end
-
+        p.input :lang
+    end  
     actions
   end
 

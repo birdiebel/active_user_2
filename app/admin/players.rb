@@ -6,7 +6,9 @@ ActiveAdmin.register Player do
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :firstname, :lastname, :dob, :sexe, :lang, :user_id,
-                licences_attributes: [:id, :num, :hcp, :club]
+                licences_attributes: [:id, :num, :hcp, :club],
+                user_attributes: [:id, :email, :role, :password, :password_confirmation, :encrypted_password]
+
   #
   # or
   #
@@ -47,7 +49,28 @@ ActiveAdmin.register Player do
       end
     end      
 
+    f.inputs "User", for: [:user, f.object.user || User.new], new_record: false do |u|
+        u.input :email
+        u.input :role
+        if f.object.new_record?
+          u.input :password
+          u.input :password_confirmation
+        end
+    end      
+
     f.actions
+  end
+
+  show do 
+    default_main_content
+    panel "Licences" do 
+      table_for player.licences do
+        column :num
+        column :hcp
+        column :club
+        column :actif
+      end
+    end
   end
   
 end
