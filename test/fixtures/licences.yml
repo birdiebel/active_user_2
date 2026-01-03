@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  num: MyString
+  hcp: 9.99
+  club: MyString
+  actif: false
+
+two:
+  num: MyString
+  hcp: 9.99
+  club: MyString
+  actif: false

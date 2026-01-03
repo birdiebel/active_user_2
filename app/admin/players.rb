@@ -5,7 +5,8 @@ ActiveAdmin.register Player do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :firstname, :lastname, :dob, :sexe, :lang, :user_id 
+  permit_params :firstname, :lastname, :dob, :sexe, :lang, :user_id,
+                licences_attributes: [:id, :num, :hcp, :club]
   #
   # or
   #
@@ -15,15 +16,15 @@ ActiveAdmin.register Player do
   #   permitted
   # end
 
-  includes :user
+  includes :user, :licences
 
   filter :lastname
 
   index do 
     selectable_column
-    id_column
-    column :firstname
-    column :lastname
+    column :full_name
+    column "User", :my_user
+    column "Licences", :my_licence    
     actions
   end
 
@@ -36,11 +37,17 @@ ActiveAdmin.register Player do
       f.input :sexe
       f.input :lang
     end
+
+    f.inputs 'Licences' do
+      f.has_many :licences, heading: false, allow_destroy: false, new_record: true do |a|
+        a.input :num
+        a.input :hcp
+        a.input :club
+        a.input :actif
+      end
+    end      
+
     f.actions
   end
-
-  # action_item :view do
-  #    p "cacaca"
-  # end
   
 end
