@@ -19,6 +19,15 @@ ActiveAdmin.register Course do
   includes :club, :tees
   config.comments = false
   
+  action_item 'Close', only: [:show] do
+    link_to 'Close', admin_club_path(resource.club_id)
+  end
+
+  action_item 'Close', only: [:edit] do
+    link_to 'Close', admin_course_path(resource.id)
+  end
+
+
   form do |f|
     f.inputs 'Course' do
       f.input :name

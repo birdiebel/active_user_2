@@ -17,6 +17,27 @@ ActiveAdmin.register Club do
   # end
 
   includes :courses
+
+  action_item 'Close', only: [:show] do
+    link_to 'Close', admin_clubs_path
+  end
+
+  action_item 'Close', only: [:edit] do
+    link_to 'Close', admin_club_path(resource.id)
+  end
+
+  # controller do
+  #   def create
+  #     create! do |format|
+  #       format.html { redirect_to collection_path, notice: "#{resource.model_name.human} was successfully created." }
+  #     end
+  #   end
+  #   def update
+  #     update! do |format|
+  #       format.html { redirect_to collection_path, notice: "#{resource.model_name.human} was successfully created." }
+  #     end
+  #   end
+  # end
   
   form do |f|
     f.input :name

@@ -17,5 +17,14 @@ ActiveAdmin.register Tee do
 
   includes :course
   config.comments = false
+
+  action_item 'Close', only: [:show] do
+    link_to 'Close', admin_course_path(resource.course_id)
+  end
+
+  action_item 'Close', only: [:edit] do
+    link_to 'Close', admin_tee_path(resource.id)
+  end
+
   
 end
