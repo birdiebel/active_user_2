@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course: one
+  nb_hole: 1
+  par_str: MyString
+  dist_str: MyString
+  stroke_str: MyString
+  slope: 1
+  rating: 9.99
+
+two:
+  course: two
+  nb_hole: 1
+  par_str: MyString
+  dist_str: MyString
+  stroke_str: MyString
+  slope: 1
+  rating: 9.99

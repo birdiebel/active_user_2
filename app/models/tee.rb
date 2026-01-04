@@ -1,0 +1,23 @@
+class Tee < ApplicationRecord
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["course_id", "created_at", "dist_str", "id", "nb_hole", "par_str", "rating", "slope", "stroke_str", "teebox", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["course"]
+  end
+
+  belongs_to :course
+
+  enum :teebox, ['Black', 'White', 'Yellow', 'Blue','Red']
+
+  def sum_dist
+    dist = dist_str.split(',').map!(&:to_i).sum
+  end
+
+  def sum_str(param)
+    datas = send(param).split(',').map!(&:to_i).sum
+  end
+
+end

@@ -40,13 +40,12 @@ ActiveAdmin.register Club do
       table_for club.courses do
         column :name
         column :version
-        column "Courses" do |course|
+        column "" do |course|
           link_to "View", admin_course_path(course)
         end
-        column "Courses" do |course|
+        column "" do |course|
           link_to "Edit", edit_admin_course_path(course)
         end  
-  
       end
     end
   end
