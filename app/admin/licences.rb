@@ -16,9 +16,13 @@ ActiveAdmin.register Licence do
   # end
 
   includes :player
-  actions :index, :show
   filter :player_lastname, :as => :string
   filter :num
+  menu false
+
+  action_item 'Close', only: [:show] do
+    link_to 'Close', admin_player_path(resource.player)
+  end
 
   index do
     column :id
@@ -27,6 +31,20 @@ ActiveAdmin.register Licence do
     column :hcp
     column :club
     actions
+  end
+
+  form do |f|
+    f.inputs "Licence" do
+      f.input :player
+      f.input :num
+      f.input :hcp
+      f.input :club
+      f.input :actif
+    end
+    f.actions do
+       f.action :submit
+       f.cancel_link(url_for(:back))
+    end   
   end
 
   show do 

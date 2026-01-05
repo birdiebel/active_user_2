@@ -24,6 +24,14 @@ ActiveAdmin.register User do
 
   filter :email
 
+  action_item 'Close', only: [:show] do
+    link_to 'Close', admin_users_path
+  end
+
+  action_item 'Close', only: [:edit] do
+    link_to 'Close', admin_user_path(resource.id)
+  end
+
   form title: 'User' do |f|
     f.inputs 'Details' do
       input :email

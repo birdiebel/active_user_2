@@ -22,6 +22,14 @@ ActiveAdmin.register Player do
 
   filter :lastname
 
+  action_item 'Close', only: [:show] do
+    link_to 'Close', admin_players_path
+  end
+
+  # action_item 'Close', only: [:edit] do
+  #   link_to 'Close', admin_player_path(resource.id)
+  # end
+
   index do 
     selectable_column
     column :full_name
@@ -52,13 +60,17 @@ ActiveAdmin.register Player do
     f.inputs "User", for: [:user, f.object.user || User.new], new_record: false do |u|
         u.input :email
         u.input :role
-        if f.object.new_record?
+        if u.object.new_record?
           u.input :password
           u.input :password_confirmation
         end
-    end      
+      end   
 
-    f.actions
+    f.actions do
+       f.action :submit
+       f.cancel_link(url_for(:back))
+    end   
+
   end
 
   show do 
@@ -69,6 +81,9 @@ ActiveAdmin.register Player do
         column :hcp
         column :club
         column :actif
+        column "" do |licence|
+          link_to "View", admin_licence_path(licence)
+        end
       end
     end
   end

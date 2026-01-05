@@ -20,4 +20,9 @@ class Tee < ApplicationRecord
     datas = send(param).split(',').map!(&:to_i).sum
   end
 
+  def icon_teebox 
+    tee_boxcolor = self.teebox.downcase
+    "<div class='bloc-teebox "+tee_boxcolor+"'></div>".html_safe
+  end
+
 end

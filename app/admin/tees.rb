@@ -17,14 +17,39 @@ ActiveAdmin.register Tee do
 
   includes :course
   config.comments = false
+  menu false
 
   action_item 'Close', only: [:show] do
     link_to 'Close', admin_course_path(resource.course_id)
   end
 
-  action_item 'Close', only: [:edit] do
-    link_to 'Close', admin_tee_path(resource.id)
+  # action_item 'Close', only: [:edit] do
+  #   link_to 'Close', admin_tee_path(resource.id)
+  # end
+
+  controller do
+    def update
+      super do |success, failure|
+        success.html { redirect_to admin_course_path(resource.course_id) }
+      end
+    end
   end
 
+  form do |f|
+    f.inputs "Tee" do
+      f.input :course
+      f.input :nb_hole
+      f.input :par_str
+      f.input :dist_str
+      f.input :stroke_str
+      f.input :slope
+      f.input :rating
+      f.input :teebox
+    end
+    f.actions do
+       f.action :submit
+       f.cancel_link(url_for(:back))
+    end   
+  end
   
 end

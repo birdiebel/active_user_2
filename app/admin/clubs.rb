@@ -22,9 +22,9 @@ ActiveAdmin.register Club do
     link_to 'Close', admin_clubs_path
   end
 
-  action_item 'Close', only: [:edit] do
-    link_to 'Close', admin_club_path(resource.id)
-  end
+  # action_item 'Close', only: [:edit] do
+  #   link_to 'Close', admin_club_path(resource.id)
+  # end
 
   # controller do
   #   def create
@@ -40,14 +40,19 @@ ActiveAdmin.register Club do
   # end
   
   form do |f|
-    f.input :name
+    f.inputs 'Club' do
+      f.input :name
+    end
     f.inputs 'Courses' do
       f.has_many :courses, heading: false, allow_destroy: false, new_record: true do |c|
         c.input :name
         c.input :version
       end
     end  
-    actions       
+    f.actions do
+       f.action :submit
+       f.cancel_link(url_for(:back))
+    end        
   end
 
   index do 
@@ -64,9 +69,6 @@ ActiveAdmin.register Club do
         column "" do |course|
           link_to "View", admin_course_path(course)
         end
-        column "" do |course|
-          link_to "Edit", edit_admin_course_path(course)
-        end  
       end
     end
   end

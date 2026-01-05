@@ -18,14 +18,15 @@ ActiveAdmin.register Course do
   
   includes :club, :tees
   config.comments = false
-  
+  menu false
+
   action_item 'Close', only: [:show] do
     link_to 'Close', admin_club_path(resource.club_id)
   end
 
-  action_item 'Close', only: [:edit] do
-    link_to 'Close', admin_course_path(resource.id)
-  end
+  # action_item 'Close', only: [:edit] do
+  #   link_to 'Close', admin_course_path(resource.id)
+  # end
 
 
   form do |f|
@@ -43,13 +44,19 @@ ActiveAdmin.register Course do
         c.input :rating
       end
     end  
-    actions       
+    f.actions do
+       f.action :submit
+       f.cancel_link(url_for(:back))
+    end        
   end
 
   show do 
     default_main_content
     panel "Tees" do 
       table_for course.tees do
+        column  do |tee|
+          raw tee.icon_teebox
+        end
         column :teebox
         column :nb_hole
         column "Par", proc { |record| record.sum_str("par_str") }
