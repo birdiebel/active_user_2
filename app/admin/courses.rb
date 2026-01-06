@@ -71,6 +71,9 @@ ActiveAdmin.register Course do
         end  
       end
     end
+    panel "Scorecard" do
+      render 'admin/courses/scorecard', {course: course}
+    end
   end
 
 end

@@ -16,7 +16,6 @@
 //
 //   .status_tag { background: #6090DB; }
 
-
 td, th {
     color: green;
     font-size: 1.5em;
@@ -39,18 +38,37 @@ td, th {
     width: 10px;
 
 }
+
+.scorecard-title {
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+
+}
+.scorecard-label {
+    font-weight: bold;
+}
+.scorecard-zone {
+    text-align: center;
+}
+
 .black {
     background-color: black;
+    color: white;
 }
 .white {
     background-color: white;
+    color: black;
 }
 .yellow {
     background-color: yellow;
+    color: black;
 }
 .blue {
     background-color: blue;
+    color: white
 }
 .red {
     background-color: red;
+    color: white;
 }

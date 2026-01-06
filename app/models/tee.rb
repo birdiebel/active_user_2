@@ -25,4 +25,8 @@ class Tee < ApplicationRecord
     "<div class='bloc-teebox "+tee_boxcolor+"'></div>".html_safe
   end
 
+  def str_to_array(param)
+    datas = send(param.downcase).split(',').map!(&:to_i)
+  end
+
 end
