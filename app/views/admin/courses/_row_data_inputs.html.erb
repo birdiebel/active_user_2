@@ -1,0 +1,29 @@
+<% if mode == 'hole_num' %>
+    <% datas = (1..tee.nb_hole).to_a %>
+<% else %>
+    <% datas = tee.str_to_array(zone) %>
+<% end %>
+
+<% if datas.count > 0 %>
+
+    <!-- ROW LABEL -->
+    <td class="scorecard-label <%= tee.teebox.downcase %>"><%= label %></td>
+    
+    <!-- HOLE 1-9 -->
+    <% datas.slice(0,9).each_with_index do |data,index|  %>
+        <td class='scorecard-zone <%= tee.teebox.downcase %>'>
+        <% if mode == 'hole_num' %>
+            <%= data %>
+        <% else %>
+            <input class="score-input" 
+                id="<%= zone %>[<%= index %>]" 
+                name="<%= zone %>[<%= index %>]" 
+                type="text" 
+                value=<%= data %> 
+                hole="<%= index+1 %>" 
+            />
+        <% end %>    
+        </td>
+    <% end %>
+
+<% end %>    

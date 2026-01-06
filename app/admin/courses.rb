@@ -47,7 +47,10 @@ ActiveAdmin.register Course do
     f.actions do
        f.action :submit
        f.cancel_link(url_for(:back))
-    end        
+    end   
+    panel "Scorecard" do
+      render 'admin/courses/score_inputs', {course: course}
+    end         
   end
 
   show do 

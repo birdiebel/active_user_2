@@ -1,0 +1,96 @@
+<h3>Scorecard for <%= course.name %> (<%= course.version%>)</h3>
+
+<table class="table-card">
+
+<%# course.tees.each do |tee| %>
+
+    <% tee = course.tees.first %>
+
+    <% if !tee.par_str.empty? %>
+        
+        <!-- TITLE -->
+        <tr>
+            <td colspan="99" class="scorecard-title <%= tee.teebox.downcase %>"><%= tee.teebox %> tees</td>
+        </tr>    
+
+        <!-- HOLE NUM -->
+        <tr>
+            <%= render partial: 'row_data_inputs', 
+                locals: {tee: tee, zone: "par_str", label: "", mode: "hole_num"} %>
+        </tr>
+
+        <!-- PAR -->
+        <tr>
+            <%= render partial: 'row_data_inputs', 
+                locals: {tee: tee, zone: "par_str", label: "Par", mode: "total"} %>
+        </tr>
+
+        <!-- STROKE -->
+        <tr>
+            <%= render partial: 'row_data_inputs', 
+                locals: {tee: tee, zone: "stroke_str", label: "Stroke", mode: "total"} %>
+        </tr>
+
+
+        <tr></tr>
+    <% end %>
+    
+<%# end %>
+
+</table>
+
+<script>
+$( document ).ready(function() {
+
+    // Select first input
+    $(".score-input").first().select();
+
+    // Select first free input (value empty)
+    $(".score-input").each(function(){
+        if ($(this).val() === "" ) {
+            $(this).select();
+            return false;
+        }
+    });
+    
+    // Number Only
+    $('.score-input').ForceNumericOnly();
+
+    // Next input except if 1
+    $('.score-input').keyup(function(e) {
+        e.preventDefault()
+        keyCode = e.keyCode
+        console.log("key "+keyCode)
+        switch (keyCode) {
+            case 9 :
+                break
+            case 16 :
+                break
+            case 46 :
+                break
+            default:
+                if ($(this).val() != 1) {        
+                    $(this).blur();
+                    var inputs = $(this).closest('.table-card').find('.score-input');
+                    inputs.eq(inputs.index(this) + 1).focus().select();
+                };
+        }
+    });    
+
+});
+
+$.fn.ForceNumericOnly = function(e) {
+    $(this).keydown(function(e)
+        {
+            var key = e.charCode || e.keyCode || 0;
+            // allow backspace, tab, delete, arrows, numbers and keypad numbers ONLY
+            return (
+                key == 8 || 
+                key == 9 ||
+                key == 46 ||
+                (key >= 37 && key <= 40) ||
+                (key >= 48 && key <= 57) ||
+                (key >= 96 && key <= 105));
+    })
+};
+</script>
