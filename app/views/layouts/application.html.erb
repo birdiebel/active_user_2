@@ -22,10 +22,19 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+  <script>
+    $(function() {
+      $( "p" ).text( "The DOM is now loaded and can be manipulated." );
+    }); 
+  </script>
+
   </head>
 
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
+      <p>Not loaded yet.</p>
       <%= yield %>
     </main>
   </body>
