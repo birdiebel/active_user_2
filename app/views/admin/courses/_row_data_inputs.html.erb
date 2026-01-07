@@ -30,9 +30,9 @@
 
     <!-- TOTAL FRONT -->
     <% if mode == 'total' %>
-        <td id='<%= zone %>-front'></td>
+        <td id='<%= zone %>-front' class='scorecard-zone <%= tee.teebox.downcase %>'></td>
     <% else %>
-        <td></td>
+        <td class='scorecard-zone <%= tee.teebox.downcase %>'></td>
     <% end %>
 
     <!-- HOLE 10-18 -->
@@ -58,18 +58,18 @@
 
         <!-- TOTAL BACK -->
         <% if mode == 'total' %>
-            <td id='<%= zone %>-back'></td>
+            <td id='<%= zone %>-back' class='scorecard-zone <%= tee.teebox.downcase %>'></td>
         <% else %>
-            <td></td>
+            <td class='scorecard-zone <%= tee.teebox.downcase %>'></td>
         <% end %>        
 
     <% end %>
 
     <!-- TOTAL CARD -->
     <% if mode == 'total' %>
-        <td id='<%= zone %>-total'></td>
+        <td id='<%= zone %>-total' class='scorecard-zone <%= tee.teebox.downcase %>'></td>
     <% else %>
-        <td></td>
+        <td class='scorecard-zone <%= tee.teebox.downcase %>'></td>
     <% end %> 
 
 
