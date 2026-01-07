@@ -365,4 +365,8 @@ ActiveAdmin.setup do |config|
 
   # The actual active admin javascript file
   config.register_javascript "https://cdn.jsdelivr.net/npm/@activeadmin/activeadmin@2.13.1/app/assets/javascripts/active_admin/base.min.js"
+
+  # My
+  config.register_javascript 'test.js'
+  config.register_javascript 'cards_edit.js'
 end

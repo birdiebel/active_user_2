@@ -70,3 +70,4 @@ end
 gem "dartsass-rails"
 gem "activeadmin"
 gem "devise"
+gem "jquery-rails"
