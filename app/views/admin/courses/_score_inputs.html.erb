@@ -22,15 +22,20 @@
         <!-- PAR -->
         <tr>
             <%= render partial: 'row_data_inputs', 
-                locals: {tee: tee, zone: "par_str", label: "Par", mode: "total"} %>
+                locals: {tee: tee, zone: "par_str", label: "Par", mode: "total", limit: 1} %>
         </tr>
 
         <!-- STROKE -->
         <tr>
             <%= render partial: 'row_data_inputs', 
-                locals: {tee: tee, zone: "stroke_str", label: "Stroke", mode: "total"} %>
+                locals: {tee: tee, zone: "stroke_str", label: "Stroke", mode: "no-total", limit: 1} %>
         </tr>
 
+        <!-- DIST -->
+        <tr>
+            <%= render partial: 'row_data_inputs', 
+                locals: {tee: tee, zone: "dist_str", label: "Dist", mode: "total", limit: 99} %>
+        </tr>
 
         <tr></tr>
     <% end %>
@@ -41,6 +46,8 @@
 
 <script>
 $( document ).ready(function() {
+
+    var zones = ['par_str','dist_str']
 
     // Select first input
     $(".score-input").first().select();
@@ -53,31 +60,47 @@ $( document ).ready(function() {
         }
     });
     
+    // Show all totals
+    show_all_total(zones)
+
     // Number Only
     $('.score-input').ForceNumericOnly();
 
-    // Next input except if 1
-    $('.score-input').keyup(function(e) {
-        e.preventDefault()
-        keyCode = e.keyCode
-        console.log("key "+keyCode)
-        switch (keyCode) {
-            case 9 :
-                break
-            case 16 :
-                break
-            case 46 :
-                break
-            default:
-                if ($(this).val() != 1) {        
-                    $(this).blur();
-                    var inputs = $(this).closest('.table-card').find('.score-input');
-                    inputs.eq(inputs.index(this) + 1).focus().select();
-                };
-        }
-    });    
+    // Enter Score
+    $('.score-input').GetScoreInput();
 
 });
+
+$.fn.GetScoreInput = function(e) {
+    $('.score-input').keyup(function(e) {
+            e.preventDefault()
+            keyCode = e.keyCode
+            limit = parseInt($(this).attr("limit"))
+            zone = $(this).attr("zone")
+            switch (keyCode) {
+                case 9 :
+                    break
+                case 16 :
+                    break
+                case 46 :
+                    break
+                default:
+                    
+                    if ($(this).val() > limit) {        
+                        $(this).blur();
+                        var inputs = $(this).closest('.table-card').find('.score-input');
+                        inputs.eq(inputs.index(this) + 1).focus().select();
+                        $(this).css('background-color','white');
+                    };
+                    if ($(this).val() == 0) {
+                        $(this).css('background-color','pink');     
+                    }                    
+            }
+
+            show_total(zone)
+
+        });        
+}
 
 $.fn.ForceNumericOnly = function(e) {
     $(this).keydown(function(e)
@@ -93,4 +116,30 @@ $.fn.ForceNumericOnly = function(e) {
                 (key >= 96 && key <= 105));
     })
 };
+
+// Sum row
+function sum_input(zone, start, stop, to_id) {
+    var total = 0;
+    $("input[zone='"+zone+"'][hole]").each(function() {
+        var thisValue = parseInt($(this).attr('hole'));    
+        if (thisValue >= start && thisValue <= stop) {
+            total += parseInt($(this).val(), 10) || 0;
+        }
+    });
+    $("#"+to_id).text(total)
+}
+
+// Show zone totals
+function show_total(zone) {
+    sum_input(zone,1,9,zone+"-front")
+    sum_input(zone,10,18,zone+"-back")
+    sum_input(zone,1,18,zone+"-total")
+}
+
+// Show all totals
+function show_all_total(zones) {
+    zones.forEach((item) => {
+        show_total(item)
+    })
+}
 </script>
