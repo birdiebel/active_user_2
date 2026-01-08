@@ -8,7 +8,7 @@ class Club < ApplicationRecord
     ["courses"]
   end
 
-  has_many :courses
+  has_many :courses, dependent: :destroy
   accepts_nested_attributes_for :courses
 
 end
