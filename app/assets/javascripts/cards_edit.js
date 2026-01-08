@@ -4,11 +4,19 @@ $( document ).ready(function() {
     var zones = ['par_str','dist_str']
 
     // Select first input
-    $(".score-input").first().select();
+    $(".score-input").first().select(); 
+
+    // Visual val = 0
+    $(".score-input").each(function() {
+        if($(this).val() == 0) {
+            $(this).css("background-color","pink")
+            $(this).val("")
+        }    
+    })
 
     // Select first free input (value empty)
     $(".score-input").each(function(){
-        if ($(this).val() === "0" ) {
+        if ($(this).val() === "" ) {
             $(this).select();
             return false;
         }

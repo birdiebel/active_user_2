@@ -2,11 +2,6 @@
 
 <table class="table-card">
 
-<%# course.tees.each do |tee| %>
-
-        
-
-
     <% if !tee.par_str.empty? %>
         
         <!-- TITLE -->
@@ -90,8 +85,16 @@
         </table>
     </div>
 
-    <input type="submit" name="commit" value="Update Tee" data-disable-with="Update Tee">
-    <a href="http://localhost:5000/admin/courses/<%= tee.course.id %>">Cancel</a>
+    <fieldset class="actions">
+        <ol><li class="action input_action " id="club_submit_action">
+                <input type="submit" name="commit" value="Update Club" data-disable-with="Update Club">
+            </li>
+            <li class="cancel">
+                <a href="<%= admin_club_course_path(tee.course.club_id, tee.course.id) %>">Cancel</a>
+            </li>
+        </ol>
+    </fieldset>
+    
 <%# end %>
 
 </table>

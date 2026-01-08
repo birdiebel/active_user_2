@@ -22,6 +22,11 @@ ActiveAdmin.register Club do
     link_to 'Close', admin_clubs_path
   end
 
+  action_item :new, only: :show do
+    link_to 'Add course', new_admin_club_course_path(club_id: resource.id)
+  end
+  
+
   # action_item 'Close', only: [:edit] do
   #   link_to 'Close', admin_club_path(resource.id)
   # end
@@ -43,13 +48,13 @@ ActiveAdmin.register Club do
     f.inputs 'Club' do
       f.input :name
     end
-    f.inputs 'Courses' do
-      f.has_many :courses, heading: false, allow_destroy: false, new_record: true do |c|
-        c.input :name
-        c.input :version
-        c.input :nb_hole
-      end
-    end  
+    # f.inputs 'Courses' do
+    #   f.has_many :courses, heading: false, allow_destroy: false, new_record: true do |c|
+    #     c.input :name
+    #     c.input :version
+    #     c.input :nb_hole
+    #   end
+    # end  
     f.actions do
        f.action :submit
        f.cancel_link(url_for(:back))
@@ -69,7 +74,7 @@ ActiveAdmin.register Club do
         column :version
         column :nb_hole
         column "" do |course|
-          link_to "View", admin_course_path(course)
+          link_to "View", admin_club_course_path(club.id, course.id)
         end
       end
     end

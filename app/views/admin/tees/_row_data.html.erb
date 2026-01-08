@@ -1,5 +1,5 @@
 <% if mode == 'hole_num' %>
-    <% datas = (1..tee.nb_hole).to_a %>
+    <% datas = (1..tee.course.nb_hole).to_a %>
 <% else %>
     <% datas = tee.str_to_array(zone) %>
 <% end %>

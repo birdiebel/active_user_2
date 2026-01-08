@@ -19,7 +19,7 @@ ActiveAdmin.register Tee do
   config.comments = false
 
   action_item 'Close', only: [:show] do
-    link_to 'Close', admin_course_path(resource.course_id)
+    link_to 'Close', admin_club_course_path(resource.course.club.id, resource.course.id)
   end
 
   # action_item 'Close', only: [:edit] do
@@ -29,7 +29,7 @@ ActiveAdmin.register Tee do
   controller do
     def update
       super do |success, failure|
-        success.html { redirect_to admin_course_path(resource.course_id) }
+        success.html { redirect_to admin_club_course_path(resource.course.club_id,resource.course.id) }
       end
     end
   end
@@ -63,7 +63,10 @@ ActiveAdmin.register Tee do
   end
 
   show do
-    default_main_content   
+    # default_main_content   
+    panel "Scorecard" do 
+      render 'admin/tees/scorecard', {tee: tee, course: tee.course}
+    end
   end
   
 end

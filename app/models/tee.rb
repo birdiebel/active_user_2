@@ -29,4 +29,12 @@ class Tee < ApplicationRecord
     datas = send(param.downcase).split(',').map!(&:to_i)
   end
 
+  def is_filled
+    if sum_str("par_str") == 0
+      return false
+    else
+      return true
+    end
+  end
+
 end

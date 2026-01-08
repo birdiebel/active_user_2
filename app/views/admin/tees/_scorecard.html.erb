@@ -2,7 +2,6 @@
 
 <table>
 
-<% course.tees.each do |tee| %>
     <% if !tee.par_str.empty? %>
         
         <!-- TITLE -->
@@ -45,12 +44,5 @@
         <tr></tr>
     <% end %>
     
-<% end %>
 
 </table>
-
-<script>
-$( document ).ready(function() {
-  console.log( "ready!" );
-});
-</script>
