@@ -17,4 +17,22 @@ class Course < ApplicationRecord
 
   accepts_nested_attributes_for :tees
 
+  after_create :create_tees
+
+  def create_tees
+    tee_list = ['Black','White','Yellow','Blue','Red']
+    init_val = " , , , , , , , , , , , , , , , , , "
+    tee_list.each do |tb|
+      self.tees.create(
+        teebox: tb,
+        nb_hole: 18,
+        par_str: init_val,
+        stroke_str: init_val,
+        dist_str: init_val,
+        slope: 120,
+        rating: 72
+      )
+    end
+  end
+
 end

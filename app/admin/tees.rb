@@ -17,7 +17,6 @@ ActiveAdmin.register Tee do
 
   includes :course
   config.comments = false
-  menu false
 
   action_item 'Close', only: [:show] do
     link_to 'Close', admin_course_path(resource.course_id)
@@ -35,21 +34,37 @@ ActiveAdmin.register Tee do
     end
   end
 
+  index do
+    column :course
+    column :teebox
+    column :nb_hole
+    actions
+  end
+
   form do |f|
-    f.inputs "Tee" do
-      f.input :course
-      f.input :nb_hole
-      f.input :par_str
-      f.input :dist_str
-      f.input :stroke_str
-      f.input :slope
-      f.input :rating
-      f.input :teebox
-    end
-    f.actions do
-       f.action :submit
-       f.cancel_link(url_for(:back))
-    end   
+    # panel "Form" do
+    #   f.inputs "Tee" do
+    #     f.input :course
+    #     f.input :nb_hole
+    #     f.input :par_str
+    #     f.input :dist_str
+    #     f.input :stroke_str
+    #     f.input :slope
+    #     f.input :rating
+    #     f.input :teebox
+    #   end
+    #   f.actions do
+    #     f.action :submit
+    #     f.cancel_link(url_for(:back))
+    #   end  
+    # end
+    panel "Scorecard" do
+        render 'admin/tees/score_inputs', {tee: tee}
+    end            
+  end
+
+  show do
+    default_main_content   
   end
   
 end

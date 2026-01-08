@@ -8,7 +8,7 @@ $( document ).ready(function() {
 
     // Select first free input (value empty)
     $(".score-input").each(function(){
-        if ($(this).val() === "" ) {
+        if ($(this).val() === "0" ) {
             $(this).select();
             return false;
         }
@@ -16,6 +16,11 @@ $( document ).ready(function() {
 
     // Show all totals
     show_all_total(zones)
+
+    create_db_field('par_str')
+    create_db_field('dist_str')
+    create_db_field('stroke_str')
+
 
     // Number Only
     $('.score-input').ForceNumericOnly();
@@ -52,6 +57,7 @@ $.fn.GetScoreInput = function(e) {
             }
 
             show_total(zone)
+            create_db_field(zone)
 
         });        
 }
@@ -70,6 +76,27 @@ $.fn.ForceNumericOnly = function(e) {
                 (key >= 96 && key <= 105));
     })
 };
+
+function create_db_field(zone) {
+
+    inputValues = $("input[zone='"+zone+"'][hole]").map(function() {
+        return parseInt($(this).val());
+    }).toArray();
+    console.log(inputValues)
+    $('#tee_'+zone).val(inputValues.join(','))
+
+}
+
+
+// $.fn.CreateDbField = function(e) {
+
+//     inputValues = $("input[zone='"+zone+"'][hole]").map(function() {
+//         return parseInt($(this).val());
+//     }).toArray();
+//     console.log(inputValues)
+//     $('#tee_'+zone).val(inputValues.join(','))
+
+// }
 
 // Sum row
 function sum_input(zone, start, stop, to_id) {

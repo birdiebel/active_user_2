@@ -1,33 +1,14 @@
 ActiveAdmin.register Course do
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
   permit_params :id, :name, :club_id, :version,
                 tees_attributes: [:id, :course_id, :nb_hole, :par_str, :dist_str, :stroke_str, :slope, :rating, :teebox] 
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :club_id, :version]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
   
   includes :club, :tees
   config.comments = false
-  menu false
 
   action_item 'Close', only: [:show] do
     link_to 'Close', admin_club_path(resource.club_id)
   end
-
-  # action_item 'Close', only: [:edit] do
-  #   link_to 'Close', admin_course_path(resource.id)
-  # end
-
 
   form do |f|
     f.inputs 'Course' do
@@ -48,9 +29,6 @@ ActiveAdmin.register Course do
        f.action :submit
        f.cancel_link(url_for(:back))
     end   
-    panel "Scorecard" do
-      render 'admin/courses/score_inputs', {course: course}
-    end         
   end
 
   show do 
@@ -73,9 +51,6 @@ ActiveAdmin.register Course do
           link_to "Edit", edit_admin_tee_path(tee)
         end  
       end
-    end
-    panel "Scorecard" do
-      render 'admin/courses/scorecard', {course: course}
     end
   end
 
