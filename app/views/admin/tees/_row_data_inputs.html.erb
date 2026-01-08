@@ -1,5 +1,5 @@
 <% if mode == 'hole_num' %>
-    <% datas = (1..tee.nb_hole).to_a %>
+    <% datas = (1..tee.course.nb_hole).to_a %>
 <% else %>
     <% datas = tee.str_to_array(zone) %>
 <% end %>
@@ -63,14 +63,15 @@
             <td class='scorecard-zone <%= tee.teebox.downcase %>'></td>
         <% end %>        
 
+        <!-- TOTAL CARD -->
+        <% if mode == 'total' %>
+            <td id='<%= zone %>-total' class='scorecard-zone <%= tee.teebox.downcase %>'></td>
+        <% else %>
+            <td class='scorecard-zone <%= tee.teebox.downcase %>'></td>
+        <% end %> 
+
     <% end %>
 
-    <!-- TOTAL CARD -->
-    <% if mode == 'total' %>
-        <td id='<%= zone %>-total' class='scorecard-zone <%= tee.teebox.downcase %>'></td>
-    <% else %>
-        <td class='scorecard-zone <%= tee.teebox.downcase %>'></td>
-    <% end %> 
 
 
 <% end %>    

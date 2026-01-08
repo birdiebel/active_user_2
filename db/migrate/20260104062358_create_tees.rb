@@ -2,7 +2,6 @@ class CreateTees < ActiveRecord::Migration[8.1]
   def change
     create_table :tees do |t|
       t.references :course
-      t.integer :nb_hole, null: false, default: 18
       t.string :par_str, null: false
       t.string :dist_str, null: false
       t.string :stroke_str, null: false

@@ -1,10 +1,10 @@
 class Course < ApplicationRecord
   
   belongs_to :club
-  has_many :tees
+  has_many :tees, dependent: :destroy
 
   def self.ransackable_attributes(auth_object = nil)
-    ["club_id", "created_at", "id", "name", "updated_at", "version"]
+    ["club_id", "created_at", "id", "name", "updated_at", "version", "nb_hole"]
   end
 
   def self.ransackable_associations(auth_object = nil)
@@ -21,11 +21,11 @@ class Course < ApplicationRecord
 
   def create_tees
     tee_list = ['Black','White','Yellow','Blue','Red']
-    init_val = " , , , , , , , , , , , , , , , , , "
+    # init_val = " , , , , , , , , , , , , , , , , , "
+    init_val = " ," * (nb_hole)
     tee_list.each do |tb|
       self.tees.create(
         teebox: tb,
-        nb_hole: 18,
         par_str: init_val,
         stroke_str: init_val,
         dist_str: init_val,

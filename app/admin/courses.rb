@@ -1,7 +1,7 @@
 ActiveAdmin.register Course do
 
-  permit_params :id, :name, :club_id, :version,
-                tees_attributes: [:id, :course_id, :nb_hole, :par_str, :dist_str, :stroke_str, :slope, :rating, :teebox] 
+  permit_params :id, :name, :club_id, :version, :nb_hole,
+                tees_attributes: [:id, :course_id, :par_str, :dist_str, :stroke_str, :slope, :rating, :teebox] 
   
   includes :club, :tees
   config.comments = false
@@ -13,11 +13,11 @@ ActiveAdmin.register Course do
   form do |f|
     f.inputs 'Course' do
       f.input :name
+      f.input :version
     end  
     f.inputs 'Tees' do
       f.has_many :tees, heading: false, allow_destroy: false, new_record: true do |c|
         c.input :teebox
-        c.input :nb_hole
         c.input :par_str
         c.input :dist_str
         c.input :stroke_str
@@ -39,7 +39,6 @@ ActiveAdmin.register Course do
           raw tee.icon_teebox
         end
         column :teebox
-        column :nb_hole
         column "Par", proc { |record| record.sum_str("par_str") }
         column "Long", proc { |record| record.sum_str("dist_str") }
         column :slope

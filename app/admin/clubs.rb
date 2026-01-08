@@ -6,7 +6,7 @@ ActiveAdmin.register Club do
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :id, :name,
-                courses_attributes: [:id, :name, :version]
+                courses_attributes: [:id, :name, :version, :nb_hole]
   #
   # or
   #
@@ -47,6 +47,7 @@ ActiveAdmin.register Club do
       f.has_many :courses, heading: false, allow_destroy: false, new_record: true do |c|
         c.input :name
         c.input :version
+        c.input :nb_hole
       end
     end  
     f.actions do
@@ -66,6 +67,7 @@ ActiveAdmin.register Club do
       table_for club.courses do
         column :name
         column :version
+        column :nb_hole
         column "" do |course|
           link_to "View", admin_course_path(course)
         end

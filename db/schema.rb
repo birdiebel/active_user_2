@@ -39,6 +39,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_04_062358) do
     t.bigint "club_id"
     t.datetime "created_at", null: false
     t.string "name", null: false
+    t.integer "nb_hole", default: 18, null: false
     t.datetime "updated_at", null: false
     t.string "version", null: false
     t.index ["club_id"], name: "index_courses_on_club_id"
@@ -73,7 +74,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_04_062358) do
     t.bigint "course_id"
     t.datetime "created_at", null: false
     t.string "dist_str", null: false
-    t.integer "nb_hole", default: 18, null: false
     t.string "par_str", null: false
     t.decimal "rating", precision: 3, scale: 1, default: "72.0"
     t.integer "slope", default: 121, null: false

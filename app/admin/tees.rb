@@ -5,7 +5,7 @@ ActiveAdmin.register Tee do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :id, :course_id, :nb_hole, :par_str, :dist_str, :stroke_str, :slope, :rating, :teebox
+  permit_params :id, :course_id, :par_str, :dist_str, :stroke_str, :slope, :rating, :teebox
   #
   # or
   #
@@ -37,7 +37,6 @@ ActiveAdmin.register Tee do
   index do
     column :course
     column :teebox
-    column :nb_hole
     actions
   end
 

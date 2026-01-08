@@ -1,7 +1,7 @@
 class Tee < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
-    ["course_id", "created_at", "dist_str", "id", "nb_hole", "par_str", "rating", "slope", "stroke_str", "teebox", "updated_at"]
+    ["course_id", "created_at", "dist_str", "id", "par_str", "rating", "slope", "stroke_str", "teebox", "updated_at"]
   end
 
   def self.ransackable_associations(auth_object = nil)

@@ -14,18 +14,6 @@
             <td colspan="99" class="scorecard-title <%= tee.teebox.downcase %>"><%= tee.teebox %> tees</td>
         </tr>    
 
-        <tr>
-            <td colspan=2 class='scorecard-label <%= tee.teebox.downcase %>'>Nb Holes</td>
-            <td colspan=2>
-                <input class="" style="width: 100%" 
-                    id="tee_nb_hole" 
-                    name="tee[nb_hole]" 
-                    type="number" 
-                    value=<%= tee.nb_hole %>
-            />            
-            </td>
-        </tr>
-
         <!-- HOLE NUM -->
         <tr>
             <%= render partial: 'row_data_inputs', 
