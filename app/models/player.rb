@@ -48,4 +48,13 @@ class Player < ApplicationRecord
         end
     end
 
+    def my_club
+        if self.licences.empty?
+            "<span class='is_red'>X</span>".html_safe
+        else
+            lic = self.licences.first
+            "<span class=''>#{lic.club}".html_safe
+        end
+    end
+
 end

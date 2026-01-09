@@ -24,6 +24,7 @@ ActiveAdmin.register Player do
   filter :lastname_cont, as: :string, label: "Name"
   filter :user_email_cont, as: :string, label: "Email"
   filter :licences_num_cont, as: :string, label: "Licence"
+  filter :licences_club_cont, as: :string, label: "Club"
 
   config.sort_order = 'lastname_asc'
 
@@ -37,10 +38,10 @@ ActiveAdmin.register Player do
   #   link_to 'Close', admin_player_path(resource.id)
   # end
 
-  index do 
-    selectable_column
+  index do |player|
     column :full_name
     column "User", :my_user
+    column "Club", :my_club
     column "Licences", :my_licence    
     actions
   end

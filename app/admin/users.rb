@@ -22,7 +22,8 @@ ActiveAdmin.register User do
 
   includes :player
 
-  filter :email
+  filter :email_cont
+  filter :actif
 
   action_item 'Close', only: [:show] do
     link_to 'Close', admin_users_path
