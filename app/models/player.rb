@@ -10,7 +10,7 @@ class Player < ApplicationRecord
 
 
     belongs_to :user, optional: true
-    has_many :licences
+    has_many :licences, dependent: :destroy
 
     validates :firstname, presence: true
     validates :lastname, presence: true

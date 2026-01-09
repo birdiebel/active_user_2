@@ -7,7 +7,7 @@ ActiveAdmin.register Player do
   #
   permit_params :firstname, :lastname, :dob, :sexe, :lang, :user_id,
                 licences_attributes: [:id, :num, :hcp, :club],
-                user_attributes: [:id, :email, :role, :password, :password_confirmation, :encrypted_password]
+                user_attributes: [:id, :email, :actif, :role, :password, :password_confirmation, :encrypted_password]
 
   #
   # or
@@ -72,6 +72,7 @@ ActiveAdmin.register Player do
             u.input :password
             u.input :password_confirmation
           end
+          u.input :actif
         end
     end   
 

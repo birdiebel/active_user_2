@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :id, :email, :role, :password, 
+  permit_params :id, :email, :actif, :role, :password, 
                 :password_confirmation, :encrypted_password, 
                 :reset_password_token, :reset_password_sent_at, 
                 :remember_created_at,
@@ -40,6 +40,7 @@ ActiveAdmin.register User do
         input :password
         input :password_confirmation
       end
+      input :actif
     end
 
     f.inputs "Player", for: [:player, f.object.player || Player.new], new_record: false do |p|
@@ -54,6 +55,7 @@ ActiveAdmin.register User do
 
   index do
     column :id
+    column :actif
     column :email
     column :role
     column :player
@@ -62,6 +64,7 @@ ActiveAdmin.register User do
 
   show do
     attributes_table_for(user) do
+      row :actif
       row :email
       row :role
     end
