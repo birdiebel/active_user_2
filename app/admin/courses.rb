@@ -35,16 +35,15 @@ ActiveAdmin.register Course do
             raw '<span style="color: red">X<span>'
           end
         end
-        column :teebox
+        column "Teebox" do |tee|
+          link_to tee.teebox, admin_tee_path(tee), method: :get
+        end
         column "Par", proc { |record| record.sum_str("par_str") }
         column "Long", proc { |record| record.sum_str("dist_str") }
         column :slope
         column :rating
         column "" do |tee|
-          link_to "View", admin_tee_path(tee)
-        end
-        column "" do |tee|
-          link_to "Edit", edit_admin_tee_path(tee)
+          button_to "Edit", edit_admin_tee_path(tee), method: :get, class: "btn-edit"
         end
       end
     end

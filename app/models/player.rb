@@ -55,4 +55,11 @@ class Player < ApplicationRecord
             "<span class=''>#{lic.club}".html_safe
         end
     end
+
+    def age
+        now = Date.today
+        age = now.year - dob.year
+        age -= 1 if (now.month < dob.month) || (now.month == dob.month && now.day < dob.day)
+        age
+    end
 end

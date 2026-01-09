@@ -1,4 +1,4 @@
-class Licence < ApplicationRecor
+class Licence < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     [ "actif", "club", "created_at", "hcp", "id", "num", "player_id", "updated_at" ]
   end

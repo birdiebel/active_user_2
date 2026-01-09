@@ -1,12 +1,11 @@
 ActiveAdmin.register Club do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :id, :name,
-                courses_attributes: [:id, :name, :version, :nb_hole]
+                courses_attributes: [ :id, :name, :version, :nb_hole ]
   #
   # or
   #
@@ -18,8 +17,10 @@ ActiveAdmin.register Club do
 
   includes :courses
 
-  action_item 'Close', only: [:show] do
-    link_to 'Close', admin_clubs_path
+  config.batch_actions = false
+
+  action_item "Close", only: [ :show ] do
+    link_to "Close", admin_clubs_path
   end
 
   filter :name_cont, as: :string, label: "Name"
@@ -42,9 +43,9 @@ ActiveAdmin.register Club do
   #     end
   #   end
   # end
-  
+
   form do |f|
-    f.inputs 'Club' do
+    f.inputs "Club" do
       f.input :name
     end
     # f.inputs 'Courses' do
@@ -53,35 +54,40 @@ ActiveAdmin.register Club do
     #     c.input :version
     #     c.input :nb_hole
     #   end
-    # end  
+    # end
     f.actions do
        f.action :submit
        f.cancel_link(url_for(:back))
-    end        
+    end
   end
 
-  index do 
-    column :name
-    actions
+  index do
+    column "Name" do |club|
+      link_to club.name, admin_club_path(club), method: :get
+    end
+    column "" do |club|
+      button_to "Edit", edit_admin_club_path(club), method: :get, class: "btn-edit"
+    end
   end
 
-  show do 
+  show do
     default_main_content
-    
-    div do
-      button_to 'Add course', new_admin_club_course_path(club_id: resource.id), method: :get
-    end 
 
-    panel "Courses" do 
+    div do
+      button_to "Add course", new_admin_club_course_path(club_id: resource.id), method: :get
+    end
+
+    panel "Courses" do
       table_for club.courses do
-        column :name
+        column "Name" do |course|
+          link_to course.name, admin_club_course_path(club.id, course), method: :get
+        end
         column :version
         column :nb_hole
         column "" do |course|
-            link_to "View", admin_club_course_path(club.id, course.id)
+          button_to "Edit", edit_admin_club_course_path(club, course), method: :get, class: "btn-edit"
         end
       end
     end
   end
-
 end

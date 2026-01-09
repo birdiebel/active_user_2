@@ -1,21 +1,7 @@
 ActiveAdmin.register Player do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
   permit_params :firstname, :lastname, :dob, :sexe, :lang, :user_id,
                 licences_attributes: [ :id, :num, :hcp, :club ],
                 user_attributes: [ :id, :email, :actif, :role, :password, :password_confirmation, :encrypted_password ]
-
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:firstname, :lastname, :dob, :sexe, :lang, :user_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
 
   belongs_to :user, optional: true
   includes :user, :licences
@@ -26,23 +12,24 @@ ActiveAdmin.register Player do
   filter :licences_club_cont, as: :string, label: "Club"
 
   config.sort_order = "lastname_asc"
-
-  scope :all
+  config.batch_actions = false
 
   action_item "Close", only: [ :show ] do
     link_to "Close", admin_players_path
   end
 
-  # action_item 'Close', only: [:edit] do
-  #   link_to 'Close', admin_player_path(resource.id)
-  # end
-
   index do |player|
+    column "Name" do |player|
+      link_to player.lastname, admin_player_path(player), method: :get
+    end
     column :full_name
+    column "Age", :age
     column "User", :my_user
     column "Club", :my_club
     column "Licences", :my_licence
-    actions
+    column "" do |player|
+      button_to "Edit", edit_admin_player_path(player), method: :get, class: "btn-edit"
+    end
   end
 
   form do |f|
@@ -89,13 +76,15 @@ ActiveAdmin.register Player do
     end
 
     panel "Licences" do
-      table_for player.licences do
-        column :num
+      table_for player.licences, class: "table-condensed" do
+        column "Licence" do |licence|
+          link_to licence.num, admin_player_licence_path(player, licence), method: :get
+        end
         column :hcp
         column :club
         column :actif
         column "" do |licence|
-          link_to "View", admin_player_licence_path(licence.player, licence)
+          button_to "Edit", edit_admin_player_licence_path(player, licence), method: :get, class: "btn-edit"
         end
       end
     end
