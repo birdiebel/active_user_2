@@ -1,11 +1,10 @@
 class Player < ApplicationRecord
-
     def self.ransackable_attributes(auth_object = nil)
-        ["created_at", "dob", "firstname", "id", "lang", "lastname", "sexe", "updated_at", "user_id"]
+        [ "created_at", "dob", "firstname", "id", "lang", "lastname", "sexe", "updated_at", "user_id" ]
     end
 
     def self.ransackable_associations(auth_object = nil)
-        ["user","licences"]
+        [ "user", "licences" ]
     end
 
 
@@ -15,8 +14,8 @@ class Player < ApplicationRecord
     validates :firstname, presence: true
     validates :lastname, presence: true
 
-    enum :sexe, [:Men, :Ladies]
-    enum :lang, [:Fr, :Nl, :En]
+    enum :sexe, [ :Men, :Ladies ]
+    enum :lang, [ :Fr, :Nl, :En ]
 
     accepts_nested_attributes_for :licences
     accepts_nested_attributes_for :user
@@ -56,5 +55,4 @@ class Player < ApplicationRecord
             "<span class=''>#{lic.club}".html_safe
         end
     end
-
 end

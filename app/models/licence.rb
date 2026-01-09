@@ -1,14 +1,12 @@
-class Licence < ApplicationRecord
-
+class Licence < ApplicationRecor
   def self.ransackable_attributes(auth_object = nil)
-    ["actif", "club", "created_at", "hcp", "id", "num", "player_id", "updated_at"]
+    [ "actif", "club", "created_at", "hcp", "id", "num", "player_id", "updated_at" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["player"]
+    [ "player" ]
   end
 
   belongs_to :player
   validates :num, presence: true
-
 end

@@ -1,13 +1,12 @@
 ActiveAdmin.register Player do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :firstname, :lastname, :dob, :sexe, :lang, :user_id,
-                licences_attributes: [:id, :num, :hcp, :club],
-                user_attributes: [:id, :email, :actif, :role, :password, :password_confirmation, :encrypted_password]
+                licences_attributes: [ :id, :num, :hcp, :club ],
+                user_attributes: [ :id, :email, :actif, :role, :password, :password_confirmation, :encrypted_password ]
 
   #
   # or
@@ -26,12 +25,12 @@ ActiveAdmin.register Player do
   filter :licences_num_cont, as: :string, label: "Licence"
   filter :licences_club_cont, as: :string, label: "Club"
 
-  config.sort_order = 'lastname_asc'
+  config.sort_order = "lastname_asc"
 
   scope :all
 
-  action_item 'Close', only: [:show] do
-    link_to 'Close', admin_players_path
+  action_item "Close", only: [ :show ] do
+    link_to "Close", admin_players_path
   end
 
   # action_item 'Close', only: [:edit] do
@@ -42,13 +41,13 @@ ActiveAdmin.register Player do
     column :full_name
     column "User", :my_user
     column "Club", :my_club
-    column "Licences", :my_licence    
+    column "Licences", :my_licence
     actions
   end
 
   form do |f|
-    f.inputs 'Player informations' do
-      # f.input :user_id, label: 'User', as: :select, collection: User.all.map { |u| ["#{u.id}, #{u.email}", u.id] }   
+    f.inputs "Player informations" do
+      # f.input :user_id, label: 'User', as: :select, collection: User.all.map { |u| ["#{u.id}, #{u.email}", u.id] }
       f.input :firstname
       f.input :lastname
       f.input :dob
@@ -56,16 +55,16 @@ ActiveAdmin.register Player do
       f.input :lang
     end
 
-    f.inputs 'Licences' do
+    f.inputs "Licences" do
       f.has_many :licences, heading: false, allow_destroy: false, new_record: true do |a|
         a.input :num
         a.input :hcp
         a.input :club
         a.input :actif
       end
-    end      
+    end
 
-    f.inputs "User" do 
+    f.inputs "User" do
         f.has_many :user, heading: false, allow_destroy: false, new_record: !resource.user do |u|
           u.input :email
           u.input :role
@@ -75,22 +74,21 @@ ActiveAdmin.register Player do
           end
           u.input :actif
         end
-    end   
+    end
 
     f.actions do
        f.action :submit
        f.cancel_link(url_for(:back))
-    end   
-
+    end
   end
 
-  show do 
+  show do
     default_main_content
     div do
-        button_to 'Add licence', new_admin_player_licence_path(player_id: resource.id), method: :get
-    end 
+        button_to "Add licence", new_admin_player_licence_path(player_id: resource.id), method: :get
+    end
 
-    panel "Licences" do 
+    panel "Licences" do
       table_for player.licences do
         column :num
         column :hcp
@@ -102,5 +100,4 @@ ActiveAdmin.register Player do
       end
     end
   end
-  
 end

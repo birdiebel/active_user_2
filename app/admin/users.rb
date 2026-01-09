@@ -1,15 +1,14 @@
 ActiveAdmin.register User do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :id, :email, :actif, :role, :password, 
-                :password_confirmation, :encrypted_password, 
-                :reset_password_token, :reset_password_sent_at, 
+  permit_params :id, :email, :actif, :role, :password,
+                :password_confirmation, :encrypted_password,
+                :reset_password_token, :reset_password_sent_at,
                 :remember_created_at,
-                player_attributes: [:id, :firstname, :lastname, :dob, :sexe, :lang]
+                player_attributes: [ :id, :firstname, :lastname, :dob, :sexe, :lang ]
 
   #
   # or
@@ -25,16 +24,16 @@ ActiveAdmin.register User do
   filter :email_cont
   filter :actif
 
-  action_item 'Close', only: [:show] do
-    link_to 'Close', admin_users_path
+  action_item "Close", only: [ :show ] do
+    link_to "Close", admin_users_path
   end
 
-  action_item 'Close', only: [:edit] do
-    link_to 'Close', admin_user_path(resource.id)
+  action_item "Close", only: [ :edit ] do
+    link_to "Close", admin_user_path(resource.id)
   end
 
-  form title: 'User' do |f|
-    f.inputs 'Details' do
+  form title: "User" do |f|
+    f.inputs "Details" do
       input :email
       input :role
       if f.object.new_record?
@@ -44,13 +43,13 @@ ActiveAdmin.register User do
       input :actif
     end
 
-    f.inputs "Player", for: [:player, f.object.player || Player.new], new_record: false do |p|
+    f.inputs "Player", for: [ :player, f.object.player || Player.new ], new_record: false do |p|
         p.input :firstname
         p.input :lastname
         p.input :dob
         p.input :sexe
         p.input :lang
-    end  
+    end
     actions
   end
 
@@ -70,8 +69,8 @@ ActiveAdmin.register User do
       row :role
     end
     if user.player
-      panel "Player" do 
-          attributes_table_for(user.player) do 
+      panel "Player" do
+          attributes_table_for(user.player) do
             row :firstname
             row :lastname
             row :dob
@@ -80,12 +79,9 @@ ActiveAdmin.register User do
           end
       end
     else
-      h3 style: "color: red" do 
+      h3 style: "color: red" do
         "No player"
-      end  
+      end
     end
-
   end
-
 end
-  
