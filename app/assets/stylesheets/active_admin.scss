@@ -16,8 +16,36 @@
 //
 //   .status_tag { background: #6090DB; }
 
+body.active_admin {
+  form {
+    input[type="text"][size],
+    input[type="number"][size] {
+      width: auto;
+    }
+  }
+  input[type=text], 
+    input[type=password], 
+    input[type=email], 
+    input[type=number], 
+    input[type=url], 
+    input[type=tel], 
+    label,
+    select,
+    textarea {
+        font-size: 1.5em; /* Adjust font size as needed */
+    }   
+}   
+
+
+
+
 .hide {
     display: none !important;
+}
+
+.table-card {
+    padding: 10px;
+    background-color: white;
 }
 
 td, th {

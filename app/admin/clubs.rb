@@ -22,10 +22,6 @@ ActiveAdmin.register Club do
     link_to 'Close', admin_clubs_path
   end
 
-  action_item :new, only: :show do
-    link_to 'Add course', new_admin_club_course_path(club_id: resource.id)
-  end
-  
 
   # action_item 'Close', only: [:edit] do
   #   link_to 'Close', admin_club_path(resource.id)
@@ -68,15 +64,21 @@ ActiveAdmin.register Club do
 
   show do 
     default_main_content
+    
+    div do
+      button_to 'Add course', new_admin_club_course_path(club_id: resource.id), method: :get
+    end 
+
     panel "Courses" do 
       table_for club.courses do
         column :name
         column :version
         column :nb_hole
         column "" do |course|
-          link_to "View", admin_club_course_path(club.id, course.id)
+            link_to "View", admin_club_course_path(club.id, course.id)
         end
       end
     end
   end
+
 end

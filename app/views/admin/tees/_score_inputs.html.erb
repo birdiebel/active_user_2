@@ -1,6 +1,6 @@
 <h3>Scorecard for <%= tee.course.name %> (<%= tee.course.version%>)</h3>
 
-<table class="table-card">
+<table class="table-card <%= tee.teebox.downcase %>">
 
     <% if !tee.par_str.empty? %>
         
