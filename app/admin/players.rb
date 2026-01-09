@@ -18,9 +18,16 @@ ActiveAdmin.register Player do
   #   permitted
   # end
 
+  belongs_to :user, optional: true
   includes :user, :licences
 
-  filter :lastname
+  filter :lastname_cont, as: :string, label: "Name"
+  filter :user_email_cont, as: :string, label: "Email"
+  filter :licences_num_cont, as: :string, label: "Licence"
+
+  config.sort_order = 'lastname_asc'
+
+  scope :all
 
   action_item 'Close', only: [:show] do
     link_to 'Close', admin_players_path
@@ -57,14 +64,16 @@ ActiveAdmin.register Player do
       end
     end      
 
-    f.inputs "User", for: [:user, f.object.user || User.new], new_record: false do |u|
-        u.input :email
-        u.input :role
-        if u.object.new_record?
-          u.input :password
-          u.input :password_confirmation
+    f.inputs "User" do 
+        f.has_many :user, heading: false, allow_destroy: false, new_record: !resource.user do |u|
+          u.input :email
+          u.input :role
+          if u.object.new_record?
+            u.input :password
+            u.input :password_confirmation
+          end
         end
-      end   
+    end   
 
     f.actions do
        f.action :submit
@@ -75,6 +84,10 @@ ActiveAdmin.register Player do
 
   show do 
     default_main_content
+    div do
+        button_to 'Add licence', new_admin_player_licence_path(player_id: resource.id), method: :get
+    end 
+
     panel "Licences" do 
       table_for player.licences do
         column :num
@@ -82,7 +95,7 @@ ActiveAdmin.register Player do
         column :club
         column :actif
         column "" do |licence|
-          link_to "View", admin_licence_path(licence)
+          link_to "View", admin_player_licence_path(licence.player, licence)
         end
       end
     end

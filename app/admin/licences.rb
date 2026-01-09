@@ -15,6 +15,7 @@ ActiveAdmin.register Licence do
   #   permitted
   # end
 
+  belongs_to :player
   includes :player
   filter :player_lastname, :as => :string
   filter :num
@@ -35,7 +36,7 @@ ActiveAdmin.register Licence do
 
   form do |f|
     f.inputs "Licence" do
-      f.input :player
+      # f.input :player
       f.input :num
       f.input :hcp
       f.input :club
@@ -47,29 +48,15 @@ ActiveAdmin.register Licence do
     end   
   end
 
-  show do 
-    attributes_table_for(resource) do 
-      row :num
-      row :hcp
-      row :club
-      row :created_at
-      row :updated_at
-    end
-    panel "Player" do
-      attributes_table_for(resource.player) do 
-        row :lastname
-        row :firstname
-        row :dob
-        row :sexe
-        row :lang
+  show :title => proc {|licence| "Licence : "+licence.player.full_name} do 
+    panel "Licence" do
+      attributes_table_for(resource) do 
+        row :num
+        row :hcp
+        row :club
+        row :created_at
+        row :updated_at
       end
-
-      if resource.player.user
-        attributes_table_for(resource.player.user) do
-          row :email
-        end
-      end
-
     end
   end
     

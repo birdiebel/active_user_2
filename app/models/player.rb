@@ -5,8 +5,9 @@ class Player < ApplicationRecord
     end
 
     def self.ransackable_associations(auth_object = nil)
-        ["user"]
+        ["user","licences"]
     end
+
 
     belongs_to :user, optional: true
     has_many :licences

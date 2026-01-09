@@ -31,13 +31,17 @@ body.active_admin {
     input[type=tel], 
     label,
     select,
+    th,td,
+    legend,
     textarea {
         font-size: 1.5em; /* Adjust font size as needed */
     }   
 }   
 
 
-
+.panel h3 {
+    font-size: 1.5em; /* Adjust font size as needed */
+}
 
 .hide {
     display: none !important;
@@ -48,10 +52,10 @@ body.active_admin {
     background-color: white;
 }
 
-td, th {
-    color: green;
-    font-size: 1.5em;
-}
+// td, th {
+//     color: green;
+//     font-size: 1.5em;
+// }
 
 .is_red {
     color: red;

@@ -22,6 +22,9 @@ ActiveAdmin.register Club do
     link_to 'Close', admin_clubs_path
   end
 
+  filter :name_cont, as: :string, label: "Name"
+  filter :courses_name_cont, as: :string, label: "Course"
+
 
   # action_item 'Close', only: [:edit] do
   #   link_to 'Close', admin_club_path(resource.id)
