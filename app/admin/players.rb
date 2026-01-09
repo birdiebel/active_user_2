@@ -14,6 +14,8 @@ ActiveAdmin.register Player do
   config.sort_order = "lastname_asc"
   config.batch_actions = false
 
+  menu label: "Players", parent: "Players", priority: 0
+
   action_item "Close", only: [ :show ] do
     link_to "Close", admin_players_path
   end
@@ -34,7 +36,6 @@ ActiveAdmin.register Player do
 
   form do |f|
     f.inputs "Player informations" do
-      # f.input :user_id, label: 'User', as: :select, collection: User.all.map { |u| ["#{u.id}, #{u.email}", u.id] }
       f.input :firstname
       f.input :lastname
       f.input :dob

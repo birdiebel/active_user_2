@@ -34,9 +34,14 @@ body.active_admin {
     th,td,
     legend,
     textarea {
-        font-size: 1.5em; /* Adjust font size as needed */
+        font-size: 1.1em; /* Adjust font size as needed */
     }   
 }   
+
+.header-item { font-size: 1.2em; }
+#page_title { 
+    font-size: 2em !important; 
+}
 
 .btn-edit {
   -webkit-border-radius: 0;
@@ -45,7 +50,7 @@ body.active_admin {
   font-family: Arial;
   color: #ffffff;
   background: darkgreen;
-  padding: 10px 10px 10px 10px;
+  padding: 5px;
   text-decoration: none;
 }
 

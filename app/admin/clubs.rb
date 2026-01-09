@@ -26,24 +26,6 @@ ActiveAdmin.register Club do
   filter :name_cont, as: :string, label: "Name"
   filter :courses_name_cont, as: :string, label: "Course"
 
-
-  # action_item 'Close', only: [:edit] do
-  #   link_to 'Close', admin_club_path(resource.id)
-  # end
-
-  # controller do
-  #   def create
-  #     create! do |format|
-  #       format.html { redirect_to collection_path, notice: "#{resource.model_name.human} was successfully created." }
-  #     end
-  #   end
-  #   def update
-  #     update! do |format|
-  #       format.html { redirect_to collection_path, notice: "#{resource.model_name.human} was successfully created." }
-  #     end
-  #   end
-  # end
-
   form do |f|
     f.inputs "Club" do
       f.input :name
