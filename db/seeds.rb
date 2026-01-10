@@ -44,6 +44,20 @@ def go_agecat(name, short, age_low, age_high, color, year)
     puts "Agecat #{name}"
 end
 
+def go_playercat(name, agecat, sexe, hcp_min, hcp_max, version, teebox, priority)
+    playercat = Playercat.new
+    playercat.name = name
+    playercat.agecat = agecat
+    playercat.sexe = sexe
+    playercat.hcp_min = hcp_min
+    playercat.hcp_max = hcp_max
+    playercat.version = version
+    playercat.teebox = teebox
+    playercat.priority = priority
+    playercat.save
+    puts "Playercat #{name}"
+end
+
 # Users, players and licence
 def seed_players(men, ladies)
     # Reset datas
@@ -67,8 +81,26 @@ def seed_agecats
     go_agecat("Senior", "S", 50, 99, "green", 2026)
 end
 
-# Seed Players
+def seed_playercats
+    # Reset datas
+    Playercat.delete_all
+
+    # Boucles
+    go_playercat("Federal", Agecat.find_by(name: "Midam"), 0, -5, 14.4, "2026", "White", 1)
+    go_playercat("Federal", Agecat.find_by(name: "Midam"), 1, -5, 14.4, "2026", "Blue", 2)
+    go_playercat("Future", Agecat.find_by(name: "All"), 0, 14.5, 36.4, "2026", "Yellow", 3)
+    go_playercat("Future", Agecat.find_by(name: "All"), 1, 14.5, 36.4, "2026", "Red", 4)
+    go_playercat("Team (bt) Serie 1", Agecat.find_by(name: "All"), 0, -5, 18.4, "2026", "White", 5)
+    go_playercat("Team (bt) Serie 1", Agecat.find_by(name: "All"), 1, -5, 18.4, "2026", "Blue", 6)
+    go_playercat("Team (bt) Serie 2", Agecat.find_by(name: "All"), 0, 18.5, 36.4, "2026", "Yellow", 7)
+    go_playercat("Team (bt) Serie 2", Agecat.find_by(name: "All"), 1, 18.5, 36.4, "2026", "Red", 8)
+end
+
+# # Seed Players
 # seed_players(50, 30)
 
-# Seed Agecats
-seed_agecats
+# # Seed Agecats
+# seed_agecats
+
+# Seed Playercats
+seed_playercats

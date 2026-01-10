@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_10_055943) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_10_112614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,6 +69,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_10_055943) do
     t.index ["player_id"], name: "index_licences_on_player_id"
   end
 
+  create_table "playercats", force: :cascade do |t|
+    t.boolean "actif", default: true
+    t.bigint "agecat_id", null: false
+    t.datetime "created_at", null: false
+    t.decimal "hcp_max", precision: 3, scale: 1
+    t.decimal "hcp_min", precision: 3, scale: 1
+    t.string "name", null: false
+    t.integer "priority", default: 0
+    t.integer "sexe", default: 0
+    t.integer "teebox", default: 0
+    t.datetime "updated_at", null: false
+    t.string "version", null: false
+    t.index ["agecat_id"], name: "index_playercats_on_agecat_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.date "dob", default: "1970-01-01", null: false
@@ -107,4 +122,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_10_055943) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "playercats", "agecats"
 end
