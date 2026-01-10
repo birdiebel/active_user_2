@@ -80,7 +80,9 @@ class Player < ApplicationRecord
         agecats.each do |agecat|
             if age >= agecat.age_low && age <= agecat.age_high
                 age_color = agecat.color.downcase
-                return "<div class='bloc-agecat' style='background-color: #{age_color};'></div>".html_safe
+                return "<div class='bloc-agecat' style='background-color: #{age_color}; color: white'>
+                        #{agecat.short}
+                        </div>".html_safe
             end
         end
         "N/A".html_safe
