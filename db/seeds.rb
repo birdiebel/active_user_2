@@ -62,7 +62,7 @@ def seed_agecats
     # Boucles
     go_agecat("All", "A", 0, 99, "black", 2026)
     go_agecat("Junior", "J", 0, 17, "orange", 2026)
-    go_agecat("Young Adult", "", 18, 24, "brown", 2026)
+    go_agecat("Young Adult", "Y", 18, 24, "brown", 2026)
     go_agecat("Midam", "M", 25, 49, "blue", 2026)
     go_agecat("Senior", "S", 50, 99, "green", 2026)
 end
