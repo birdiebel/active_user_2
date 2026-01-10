@@ -26,6 +26,10 @@ ActiveAdmin.register Player do
     end
     column :full_name
     column "Age", :age
+    column "Cat"  do |player|
+      raw player.icon_age_category
+    end
+    column :age_category
     column "User", :my_user
     column "Club", :my_club
     column "Licences", :my_licence

@@ -62,4 +62,27 @@ class Player < ApplicationRecord
         age -= 1 if (now.month < dob.month) || (now.month == dob.month && now.day < dob.day)
         age
     end
+
+    def age_category
+        current_year = Date.today.year
+        agecats = Agecat.where(year: current_year).order(id: :desc)
+        agecats.each do |agecat|
+            if age >= agecat.age_low && age <= agecat.age_high
+                return agecat.name
+            end
+        end
+        "N/A".html_safe
+    end
+
+    def icon_age_category
+        current_year = Date.today.year
+        agecats = Agecat.where(year: current_year).order(id: :desc)
+        agecats.each do |agecat|
+            if age >= agecat.age_low && age <= agecat.age_high
+                age_color = agecat.color.downcase
+                return "<div class='bloc-agecat' style='background-color: #{age_color};'></div>".html_safe
+            end
+        end
+        "N/A".html_safe
+    end
 end

@@ -1,6 +1,6 @@
 
 # Genere
-def godo(nbCount, sexe)
+def go_players(nbCount, sexe)
     # Boucle
     (1..nbCount).each do |i|
         # User
@@ -32,6 +32,18 @@ def godo(nbCount, sexe)
     end
 end
 
+def go_agecat(name, short, age_low, age_high, color, year)
+    agecat = Agecat.new
+    agecat.name = name
+    agecat.short = short
+    agecat.age_low = age_low
+    agecat.age_high = age_high
+    agecat.color = color
+    agecat.year = year
+    agecat.save
+    puts "Agecat #{name}"
+end
+
 # Users, players and licence
 def seed_players(men, ladies)
     # Reset datas
@@ -39,9 +51,24 @@ def seed_players(men, ladies)
     Player.delete_all
 
     # Boucles
-    godo(men, 0)
-    godo(ladies, 1)
+    go_players(men, 0)
+    go_players(ladies, 1)
+end
+
+def seed_agecats
+    # Reset datas
+    Agecat.delete_all
+
+    # Boucles
+    go_agecat("All", "A", 0, 99, "black", 2026)
+    go_agecat("Junior", "J", 0, 17, "orange", 2026)
+    go_agecat("Young Adult", "", 18, 24, "brown", 2026)
+    go_agecat("Midam", "M", 25, 49, "blue", 2026)
+    go_agecat("Senior", "S", 50, 99, "green", 2026)
 end
 
 # Seed Players
-seed_players(50, 30)
+# seed_players(50, 30)
+
+# Seed Agecats
+seed_agecats
