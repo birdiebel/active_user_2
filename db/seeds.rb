@@ -1,11 +1,3 @@
-# Users, players and licence
-
-NbMe = 100
-NbLadies = 50
-
-# Reset datas
-User.delete_all
-Player.delete_all
 
 # Genere
 def godo(nbCount, sexe)
@@ -15,6 +7,7 @@ def godo(nbCount, sexe)
         user = User.new
         user.email = Faker::Internet.email
         user.password = "123456"
+        user.actif = true
         user.save
         puts "User #{user.id}"
 
@@ -36,12 +29,19 @@ def godo(nbCount, sexe)
         licence.club = Faker::Sports::Basketball.team
         licence.save
         puts "Licence #{i}"
-
     end
-
 end
 
-# Boucles
-godo(NbMe,0)
-godo(NbLadies,1)
+# Users, players and licence
+def seed_players(men, ladies)
+    # Reset datas
+    User.delete_all
+    Player.delete_all
 
+    # Boucles
+    godo(men, 0)
+    godo(ladies, 1)
+end
+
+# Seed Players
+seed_players(50, 30)
