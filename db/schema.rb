@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_11_034458) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_11_084302) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,11 +60,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_11_034458) do
   create_table "events", force: :cascade do |t|
     t.boolean "actif", default: true
     t.datetime "created_at", null: false
+    t.integer "format", default: 0
     t.string "name", null: false
     t.integer "status", default: 0
     t.bigint "tour_id"
     t.datetime "updated_at", null: false
     t.index ["tour_id"], name: "index_events_on_tour_id"
+  end
+
+  create_table "events_playercats", id: false, force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "playercat_id", null: false
   end
 
   create_table "licences", force: :cascade do |t|
@@ -83,6 +89,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_11_034458) do
     t.boolean "actif", default: true
     t.bigint "agecat_id", null: false
     t.datetime "created_at", null: false
+    t.integer "event_id"
+    t.integer "format", default: 0
     t.decimal "hcp_max", precision: 3, scale: 1
     t.decimal "hcp_min", precision: 3, scale: 1
     t.string "name", null: false

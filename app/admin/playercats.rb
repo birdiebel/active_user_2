@@ -1,6 +1,6 @@
 ActiveAdmin.register Playercat do
   permit_params :name, :agecat_id, :hcp_min, :hcp_max, :version,
-                :teebox, :sexe, :priority, :actif
+                :teebox, :sexe, :priority, :actif, :format
 
   config.batch_actions = false
 
@@ -18,6 +18,7 @@ ActiveAdmin.register Playercat do
       link_to playercat.name, admin_playercat_path(playercat), method: :get
     end
     column "Age Category", :agecat
+    column "Format", :format
     column "HCP Min", :hcp_min
     column "HCP Max", :hcp_max
     column "Sexe", :sexe
@@ -33,6 +34,7 @@ ActiveAdmin.register Playercat do
   form do |f|
     f.inputs "Player Category" do
       f.input :name
+      f.input :format, as: :select, collection: Playercat.formats.keys
       f.input :agecat, as: :select, collection: Agecat.all.collect { |a| [ a.name, a.id ] }
       f.input :hcp_min
       f.input :hcp_max

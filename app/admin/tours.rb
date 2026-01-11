@@ -53,8 +53,12 @@ ActiveAdmin.register Tour do
         column "Name" do |event|
           link_to event.name, admin_tour_event_path(tour, event), method: :get
         end
+        column "Format", :format
         column "Status" do |event|
           event.status
+        end
+        column "Playercats" do |event|
+          event.playercats.map(&:name).join(", ")
         end
         column "" do |event|
           button_to "Edit", edit_admin_tour_event_path(tour, event), method: :get, class: "btn-edit"
