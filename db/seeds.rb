@@ -58,6 +58,29 @@ def go_playercat(name, agecat, sexe, hcp_min, hcp_max, version, teebox, priority
     puts "Playercat #{name}"
 end
 
+def seed_tours(name)
+    # Reset datas
+    Tour.delete_all
+    Event.delete_all
+
+    # Boucles
+    tour1 = Tour.new
+    tour1.name = "Federal Tour"
+    tour1.status = :open
+    tour1.actif = true
+    tour1.year = 2026
+    tour1.save
+    puts "Tour #{tour1.name}"
+
+    event1 = Event.new
+    event1.name = "Rigenée "
+    event1.status = :created
+    event1.actif = true
+    event1.tour = tour1
+    event1.save
+    puts " Event #{event1.name}"
+end
+
 # Users, players and licence
 def seed_players(men, ladies)
     # Reset datas
@@ -103,4 +126,7 @@ end
 # seed_agecats
 
 # Seed Playercats
-seed_playercats
+# seed_playercats
+
+# Seed Tours and Events
+seed_tours("Federal Tour")

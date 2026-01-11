@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_10_112614) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_11_034458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -55,6 +55,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_10_112614) do
     t.string "version", null: false
     t.index ["club_id"], name: "index_courses_on_club_id"
     t.index ["name"], name: "index_courses_on_name", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.boolean "actif", default: true
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.integer "status", default: 0
+    t.bigint "tour_id"
+    t.datetime "updated_at", null: false
+    t.index ["tour_id"], name: "index_events_on_tour_id"
   end
 
   create_table "licences", force: :cascade do |t|
@@ -107,6 +117,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_10_112614) do
     t.integer "teebox", default: 1
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_tees_on_course_id"
+  end
+
+  create_table "tours", force: :cascade do |t|
+    t.boolean "actif", default: true
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.integer "status", default: 0
+    t.datetime "updated_at", null: false
+    t.integer "year", default: 2026, null: false
   end
 
   create_table "users", force: :cascade do |t|
