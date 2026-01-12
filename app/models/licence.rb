@@ -1,4 +1,7 @@
 class Licence < ApplicationRecord
+  belongs_to :player
+  has_many :entries
+
   def self.ransackable_attributes(auth_object = nil)
     [ "actif", "club", "created_at", "hcp", "id", "num", "player_id", "updated_at" ]
   end
@@ -7,6 +10,5 @@ class Licence < ApplicationRecord
     [ "player" ]
   end
 
-  belongs_to :player
   validates :num, presence: true
 end

@@ -1,4 +1,8 @@
 class Player < ApplicationRecord
+    belongs_to :user, optional: true
+    has_many :licences, dependent: :destroy
+    has_many :entries, dependent: :destroy
+
     def self.ransackable_attributes(auth_object = nil)
         [ "created_at", "dob", "firstname", "id", "lang", "lastname", "sexe", "updated_at", "user_id" ]
     end
@@ -6,10 +10,6 @@ class Player < ApplicationRecord
     def self.ransackable_associations(auth_object = nil)
         [ "user", "licences" ]
     end
-
-
-    belongs_to :user, optional: true
-    has_many :licences, dependent: :destroy
 
     validates :firstname, presence: true
     validates :lastname, presence: true
