@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_11_084302) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_12_080552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -55,6 +55,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_11_084302) do
     t.string "version", null: false
     t.index ["club_id"], name: "index_courses_on_club_id"
     t.index ["name"], name: "index_courses_on_name", unique: true
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "event_id", null: false
+    t.bigint "licence_id"
+    t.bigint "player_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_entries_on_event_id"
+    t.index ["licence_id"], name: "index_entries_on_licence_id"
+    t.index ["player_id"], name: "index_entries_on_player_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -150,5 +161,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_11_084302) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "entries", "events"
+  add_foreign_key "entries", "licences"
+  add_foreign_key "entries", "players"
   add_foreign_key "playercats", "agecats"
 end

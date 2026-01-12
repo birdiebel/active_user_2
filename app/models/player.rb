@@ -20,7 +20,6 @@ class Player < ApplicationRecord
     accepts_nested_attributes_for :licences
     accepts_nested_attributes_for :user
 
-
     def full_name
         "#{self.firstname} #{self.lastname}"
     end
