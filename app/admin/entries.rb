@@ -2,8 +2,13 @@ ActiveAdmin.register Entry do
   permit_params :event_id, :player_id, :licence_id, :status
 
   includes :event, :player, :licence
+  config.batch_actions = false
 
   index do
+    div do
+        button_to "Add Player", admin_add_entry_path(event_id: 1), method: :get
+    end
+
     table_for Entry.order("created_at DESC") do
       column :event
       column :player do |entry|
@@ -21,6 +26,8 @@ ActiveAdmin.register Entry do
       column :updated_at
       actions
     end
+
+
 
     # table_for Player.all do |player|
     #     column :id
