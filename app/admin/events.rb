@@ -33,10 +33,11 @@ ActiveAdmin.register Event do
   end
 
   show title: myTitle do
+    h3 "Tour : #{resource.tour.name}" if resource.tour
     panel "Add a Player" do
       # Formulaire de recherche
       div do
-        form action: admin_tour_event_path(resource), method: :get do
+        form action: admin_tour_event_path(resource.tour, resource), method: :get do
           div style: "display: flex; gap: 10px; align-items: center;" do
             label "Find by name or licence number :"
             input type: :text, name: :player_lastname, value: params[:player_lastname]
