@@ -1,0 +1,44 @@
+{
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "javascript": "javascript",
+    "html": "html",
+    "erb": "html",
+    "ruby": "html"
+  },
+  "emmet.includeLanguages": {
+    "erb": "html",
+    "ruby": "html"
+  },
+  "files.autoSave": "onFocusChange",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[erb]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[ruby]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "files.associations": {
+    "*.erb": "erb"
+  },
+  "window.zoomLevel": 2,
+  "workbench.iconTheme": "vscode-icons",
+  "vsicons.dontShowNewVersionMessage": true,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "none",
+  "git.enableSmartCommit": true,
+  "workbench.editor.limit.value": 1,
+  "workbench.settings.applyToAllProfiles": ["workbench.editor.limit.value"],
+  "workbench.editor.limit.perEditorGroup": true,
+  "git.confirmSync": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true
+}

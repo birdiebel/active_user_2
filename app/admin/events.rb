@@ -33,7 +33,33 @@ ActiveAdmin.register Event do
   end
 
   show title: myTitle do
-    default_main_content
+    panel "Entries" do
+      div do
+        link_to "Add Player", admin_add_entry_path(event_id: event), method: :get
+      end
+
+      table_for event.entries do |entry|
+        column "CAT" do |entry|
+          entry.player.icon_age_category
+        end
+        column :player do |entry|
+          entry.player.full_name
+        end
+        column :licence do |entry|
+          if entry.licence
+            "#{entry.licence.num} (#{entry.licence.club})"
+          else
+            "N/A"
+          end
+        end
+        column :status
+        column :updated_at
+        column "Event" do |entry|
+          entry.event.name
+        end
+      end
+    end
+
     panel "Player Categories" do
       table_for event.playercats do |playercat|
           column "name", :name
@@ -44,6 +70,8 @@ ActiveAdmin.register Event do
           column "hcp_max", :hcp_max
       end
     end
+
+    default_main_content
   end
 
   form do |f|

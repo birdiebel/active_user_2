@@ -1,12 +1,14 @@
 ActiveAdmin.register Entry do
   permit_params :event_id, :player_id, :licence_id, :status
 
+  menu false
+
   includes :event, :player, :licence
   config.batch_actions = false
 
   index do
     div do
-        button_to "Add Player", admin_add_entry_path(event_id: 1), method: :get
+        link_to "Add Player", admin_add_entry_path(event_id: 2), method: :get
     end
 
     table_for Entry.order("created_at DESC") do

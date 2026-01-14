@@ -1,4 +1,4 @@
-ActiveAdmin.register_page "add_entry" do
+ActiveAdmin.register_page "addtest" do
   menu false
 
   # -----------------------------
@@ -7,7 +7,7 @@ ActiveAdmin.register_page "add_entry" do
   page_action :create_entry, method: :post do
     unless params[:event_id].present?
       redirect_to admin_add_entry_path,
-                  alert: "Event missing"
+                  alert: "Événement manquant"
       return
     end
 
@@ -16,11 +16,11 @@ ActiveAdmin.register_page "add_entry" do
 
     if Entry.exists?(player: player, event: event)
       redirect_to admin_add_entry_path(event_id: event.id),
-                  alert: "An entry already exists for this player and event"
+                  alert: "Une entry existe déjà pour ce joueur et cet événement"
     else
       Entry.create!(player: player, event: event)
-      redirect_to admin_tour_event_path(event.tour_id, event),
-                  notice: "Entry created for #{player.firstname} #{player.lastname}"
+      redirect_to admin_add_entry_path(event_id: event.id),
+                  notice: "Entry créée pour #{player.firstname} #{player.lastname}"
     end
   end
 
@@ -40,7 +40,6 @@ ActiveAdmin.register_page "add_entry" do
       end
 
       @event_id = @event.id
-      @tour_id = @event.tour_id
       @players = Player.none
       @players_with_entry_ids = []
 
@@ -62,29 +61,23 @@ ActiveAdmin.register_page "add_entry" do
   # -----------------------------
   # View
   # -----------------------------
-  content title: "Find players" do
-    panel "Find by name" do
+  content title: "Recherche de joueurs" do
+    panel "Rechercher un joueur par nom" do
       active_admin_form_for :search,
             url: admin_add_entry_path,
             params: { lastname: :lastname, event_id: :event_id },
             method: :get do |f|
         f.inputs do
-          f.input :lastname, label: "Name"
-          f.input :event_id, input_html: { value: arbre_context.assigns[:event_id] }
+          f.input :lastname, label: "Nom du joueur"
+          f.input :event_id, input_html: { value: params[:event_id] }
         end
         f.actions do
-          f.action :submit, label: "Find"
+          f.action :submit, label: "Rechercher"
         end
-      end
-      div do
-        button_to "Cancel",
-          admin_tour_event_path(arbre_context.assigns[:tour_id], arbre_context.assigns[:event_id]),
-          method: :get,
-          class: "btn-cancel"
       end
     end
 
-    panel "Results (max 10)" do
+    panel "Résultats (max 10)" do
       if players.present?
         table_for players do |player|
           column :id
@@ -101,21 +94,20 @@ ActiveAdmin.register_page "add_entry" do
 
           column "Action" do |player|
             if players_with_entry_ids.include?(player.id)
-              span "Unavailable", :error
+              span "Indisponible", :error
             else
-              button_to "Register",
+              button_to "Créer une entry",
                 { action: :create_entry },
                   method: :post,
                   params: {
                     player_id: player.id,
                     event_id: @arbre_context.assigns[:event_id] },
-                    class: "btn-edit",
-                data: { confirm: "Create an entry for this event?" }
+                data: { confirm: "Créer une entry pour cet événement ?" }
             end
           end
         end
       else
-        para "No players found."
+        para "Aucun joueur trouvé."
       end
     end
   end

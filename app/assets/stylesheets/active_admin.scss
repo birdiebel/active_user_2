@@ -8,8 +8,8 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
-@import "active_admin/mixins";
-@import "active_admin/base";
+@import 'active_admin/mixins';
+@import 'active_admin/base';
 
 // Overriding any non-variable Sass must be done after the fact.
 // For example, to change the default status-tag color:
@@ -18,44 +18,48 @@
 
 body.active_admin {
   form {
-    input[type="text"][size],
-    input[type="number"][size] {
+    input[type='text'][size],
+    input[type='number'][size] {
       width: auto;
     }
   }
-  input[type=text], 
-    input[type=password], 
-    input[type=email], 
-    input[type=number], 
-    input[type=url], 
-    input[type=tel], 
-    label,
-    select,
-    th,td,
-    legend,
-    textarea {
-        font-size: 1.1em; /* Adjust font size as needed */
-    } 
-    table {
-        border-collapse: collapse;
-        width: auto;
-        table-layout: auto;
-        // border: 1px solid #ccc;        
-    }
-    td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-        white-space: nowrap;
-    }  
-}   
-
-.header-item { font-size: 1.2em; }
-#page_title { 
-    font-size: 2em !important; 
+  input[type='text'],
+  input[type='password'],
+  input[type='email'],
+  input[type='number'],
+  input[type='url'],
+  input[type='tel'],
+  label,
+  select,
+  th,
+  td,
+  legend,
+  textarea {
+    font-size: 1.1em; /* Adjust font size as needed */
+  }
+  table {
+    border-collapse: collapse;
+    width: auto;
+    table-layout: auto;
+    // border: 1px solid #ccc;
+  }
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+  }
 }
 
-.btn-edit {
+.header-item {
+  font-size: 1.2em;
+}
+#page_title {
+  font-size: 2em !important;
+}
+
+.btn-edit,
+btn-cancel {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0px;
@@ -65,18 +69,21 @@ body.active_admin {
   padding: 5px;
   text-decoration: none;
 }
+.btn-cancel {
+  background: darkred;
+}
 
 .panel h3 {
-    font-size: 1.5em; /* Adjust font size as needed */
+  font-size: 1.5em; /* Adjust font size as needed */
 }
 
 .hide {
-    display: none !important;
+  display: none !important;
 }
 
 .table-card {
-    padding: 10px;
-    background-color: white;
+  padding: 10px;
+  background-color: white;
 }
 
 // td, th {
@@ -85,69 +92,67 @@ body.active_admin {
 // }
 
 .is_red {
-    color: red;
-    font-weight: bold;
+  color: red;
+  font-weight: bold;
 }
 
 .is_bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .bloc-teebox {
-    border: 1px solid black;
-    padding: 5px 10px 5px 10px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    width: 10px;
-
+  border: 1px solid black;
+  padding: 5px 10px 5px 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  width: 10px;
 }
 
 .bloc-agecat {
-    -webkit-border-radius: 5;
-    -moz-border-radius: 5;
-    border-radius: 5px;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    text-align: center;
-    font-size: 0.8em;
-    font-weight: bold;
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: bold;
 }
 
 .scorecard-title {
-    font-weight: bold;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
 }
 .scorecard-label {
-    font-weight: bold;
+  font-weight: bold;
 }
 .scorecard-zone {
-    text-align: center;
+  text-align: center;
 }
 
 .black {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 .white {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 .yellow {
-    background-color: yellow;
-    color: black;
+  background-color: yellow;
+  color: black;
 }
 .blue {
-    background-color: blue;
-    color: white
+  background-color: blue;
+  color: white;
 }
 .red {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
 
 .score-input {
-    text-align: center;
-    width: 100%;
+  text-align: center;
+  width: 100%;
 }

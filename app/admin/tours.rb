@@ -42,13 +42,11 @@ ActiveAdmin.register Tour do
   end
 
   show do
-    default_main_content
-
-    div do
-      button_to "Add event", new_admin_tour_event_path(tour_id: resource.id), method: :get
-    end
-
     panel "Events" do
+      div do
+        button_to "Add event", new_admin_tour_event_path(tour_id: resource.id), method: :get
+      end
+
       table_for tour.events do
         column "Name" do |event|
           link_to event.name, admin_tour_event_path(tour, event), method: :get
@@ -65,5 +63,6 @@ ActiveAdmin.register Tour do
         end
       end
     end
+    default_main_content
   end
 end
