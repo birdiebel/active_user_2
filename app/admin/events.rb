@@ -33,12 +33,78 @@ ActiveAdmin.register Event do
   end
 
   show title: myTitle do
-    panel "Entries" do
+    panel "Add a Player" do
+      # Formulaire de recherche
       div do
-        link_to "Add Player", admin_add_entry_path(event_id: event), method: :get
+        form action: admin_tour_event_path(resource), method: :get do
+          div style: "display: flex; gap: 10px; align-items: center;" do
+            label "Find by name or licence number :"
+            input type: :text, name: :player_lastname, value: params[:player_lastname]
+            button "Find", type: :submit
+            button "Clear", type: :button, onclick: "window.location='#{admin_tour_event_path(resource.tour, resource)}'"
+          end
+        end
       end
 
-      table_for event.entries do |entry|
+      # Si une recherche est effectuée
+      if params[:player_lastname].present?
+        div do
+          # Limiter le nombre de joueurs trouvés à 10
+          #
+          # Exclure les joueurs déjà inscrits à cet événement
+          players = Player
+            .left_joins(:licences) # Associe la table `licences` via une jointure (si la relation existe)
+            .where(
+              "players.lastname ILIKE :query OR licences.num ILIKE :query",
+              query: "%#{params[:player_lastname].strip}%" # Recherche sur lastname ou licence.num
+            )
+            .where.not(id: Entry.where(event_id: resource.id).select(:player_id)) # Exclure les joueurs déjà inscrits
+            .limit(10)
+
+          h4 "Max 10 players show", style: "color: darkred;"
+
+          if players.any?
+            table do
+              thead do
+                tr do
+                  th "Cat"
+                  th "Nom complet"
+                  th "Licence"
+                  th "Club"
+                  th "Âge"
+                  th "Action"
+                end
+              end
+              tbody do
+                players.each do |player|
+                  tr do
+                    td player.icon_age_category
+                    td player.full_name # Remplacez `full_name` par la méthode appropriée pour afficher le nom complet.
+                    td player.my_licence # Remplacez `my_licence` par l'attribut ou la méthode correspondant à la licence.
+                    td player.my_club # Remplacez `my_club` par l'attribut ou la méthode correspondant au club.
+                    td player.age # Remplacez `age` par l'attribut ou la méthode calculant l'âge.
+
+                    # Bouton pour ajouter à la table entries
+                    td do
+                      if player.licences.exists?
+                        link_to "Ajouter", admin_entries_path(entry: { event_id: resource.id, player_id: player.id }), method: :post, class: "button"
+                      else
+                        span "No licence found", style: "color: red;"
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          else
+            div "Aucun joueur trouvé."
+          end
+        end
+      end
+    end
+
+    panel "Entries" do
+      table_for event.entries.order("created_at DESC") do |entry|
         column "CAT" do |entry|
           entry.player.icon_age_category
         end

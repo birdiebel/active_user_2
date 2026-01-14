@@ -6,6 +6,22 @@ ActiveAdmin.register Entry do
   includes :event, :player, :licence
   config.batch_actions = false
 
+  controller do
+    def create
+      puts("Creating Entry with params: #{params[:entry].inspect}")
+      @entry = Entry.new(entry_params)
+      if @entry.save
+        redirect_to admin_tour_event_path(@entry.event.tour_id, @entry.event_id), notice: "Joueur ajouté avec succès à l'événement."
+      else
+        redirect_back fallback_location: admin_tour_event_path(@entry.event.tour_id, @entry.event_id), alert: "Une erreur s'est produite."
+      end
+    end
+
+    def entry_params
+      params.require(:entry).permit(:event_id, :player_id)
+    end
+  end
+
   index do
     div do
         link_to "Add Player", admin_add_entry_path(event_id: 2), method: :get
