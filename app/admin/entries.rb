@@ -37,6 +37,7 @@ ActiveAdmin.register Entry do
       if !f.object.new_record?
         f.input :licence, collection: Licence.where(player_id: f.object.player_id).order("num ASC").all.map { |l| [ "#{l.num} (#{l.club})", l.id ] }
       end
+      f.input :playercat, collection: f.object.event.playercats.all.map { |pc| [ pc.name, pc.id ] }
       f.input :status
     end
     f.actions

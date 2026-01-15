@@ -1,10 +1,9 @@
 ActiveAdmin.register Event do
-  permit_params :name, :status, :actif, :tour_id, :format, playercat_ids: []
   belongs_to :tour
   includes :tour
 
-  # menu false
-  # menu label: "Events", parent: "Event", priority: 1
+  permit_params :name, :status, :actif, :tour_id, :format, playercat_ids: []
+
   menu false
   config.batch_actions = false
 
@@ -105,14 +104,24 @@ ActiveAdmin.register Event do
 
     panel "Entries : #{event.entries.count}" do
       table_for event.entries.order("created_at DESC") do |entry|
+        column :id
         column "CAT" do |entry|
           entry.player.icon_age_category
         end
         column :player do |entry|
           entry.player.full_name
         end
+        column "Age" do |entry|
+          entry.player.age
+        end
         column "Licence" do |entry|
           entry.player.my_licence
+        end
+        column "Hcp" do |entry|
+          entry.hcp
+        end
+        column "Player Cat" do |entry|
+          entry.playercat ? entry.playercat.name : "N/A"
         end
         column "Club" do |entry|
           entry.player.my_club
@@ -133,8 +142,9 @@ ActiveAdmin.register Event do
           column "teebox", :teebox
           column "hcp_min", :hcp_min
           column "hcp_max", :hcp_max
-          column "cat" do |playercat|
-            playercat.agecat.name
+          column "version", :version
+          column "Age Cat" do |playercat|
+            playercat.agecats.map(&:name).join(", ")
           end
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_12_154011) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_15_092702) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -39,6 +39,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_154011) do
     t.integer "year", default: 2026
   end
 
+  create_table "agecats_playercats", id: false, force: :cascade do |t|
+    t.bigint "agecat_id", null: false
+    t.bigint "playercat_id", null: false
+  end
+
   create_table "clubs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -60,13 +65,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_154011) do
   create_table "entries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "event_id", null: false
+    t.decimal "hcp", precision: 3, scale: 1
     t.bigint "licence_id"
     t.bigint "player_id", null: false
+    t.bigint "playercat_id"
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_entries_on_event_id"
     t.index ["licence_id"], name: "index_entries_on_licence_id"
     t.index ["player_id"], name: "index_entries_on_player_id"
+    t.index ["playercat_id"], name: "index_entries_on_playercat_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -99,7 +107,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_154011) do
 
   create_table "playercats", force: :cascade do |t|
     t.boolean "actif", default: true
-    t.bigint "agecat_id", null: false
     t.datetime "created_at", null: false
     t.integer "event_id"
     t.integer "format", default: 0
@@ -111,7 +118,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_154011) do
     t.integer "teebox", default: 0
     t.datetime "updated_at", null: false
     t.string "version", null: false
-    t.index ["agecat_id"], name: "index_playercats_on_agecat_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -163,6 +169,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_12_154011) do
   end
 
   add_foreign_key "entries", "events"
+  add_foreign_key "entries", "playercats"
   add_foreign_key "entries", "players"
-  add_foreign_key "playercats", "agecats"
 end
