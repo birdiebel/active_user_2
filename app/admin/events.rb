@@ -33,7 +33,6 @@ ActiveAdmin.register Event do
   end
 
   show title: myTitle do
-    h3 "Tour : #{resource.tour.name}" if resource.tour
     panel "Add a Player" do
       # Formulaire de recherche
       div do
@@ -104,7 +103,7 @@ ActiveAdmin.register Event do
       end
     end
 
-    panel "Entries" do
+    panel "Entries : #{event.entries.count}" do
       table_for event.entries.order("created_at DESC") do |entry|
         column "CAT" do |entry|
           entry.player.icon_age_category
@@ -112,17 +111,16 @@ ActiveAdmin.register Event do
         column :player do |entry|
           entry.player.full_name
         end
-        column :licence do |entry|
-          if entry.licence
-            "#{entry.licence.num} (#{entry.licence.club})"
-          else
-            "N/A"
-          end
+        column "Licence" do |entry|
+          entry.player.my_licence
+        end
+        column "Club" do |entry|
+          entry.player.my_club
         end
         column :status
         column :updated_at
-        column "Event" do |entry|
-          entry.event.name
+        column "" do |entry|
+          button_to "Edit", edit_admin_entry_path(entry), method: :get, class: "btn-edit"
         end
       end
     end
@@ -135,6 +133,9 @@ ActiveAdmin.register Event do
           column "teebox", :teebox
           column "hcp_min", :hcp_min
           column "hcp_max", :hcp_max
+          column "cat" do |playercat|
+            playercat.agecat.name
+          end
       end
     end
 

@@ -63,6 +63,16 @@ class Player < ApplicationRecord
         age
     end
 
+    def age_category_id
+        current_year = Date.today.year
+        agecats = Agecat.where(year: current_year).order(id: :desc)
+        agecats.each do |agecat|
+            if age >= agecat.age_low && age <= agecat.age_high
+                return agecat.id
+            end
+        end
+    end
+
     def age_category
         current_year = Date.today.year
         agecats = Agecat.where(year: current_year).order(id: :desc)

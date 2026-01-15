@@ -8,7 +8,6 @@ ActiveAdmin.register Entry do
 
   controller do
     def create
-      puts("Creating Entry with params: #{params[:entry].inspect}")
       @entry = Entry.new(entry_params)
       if @entry.save
         redirect_to admin_tour_event_path(@entry.event.tour_id, @entry.event_id), notice: "Joueur ajouté avec succès à l'événement."
@@ -17,60 +16,24 @@ ActiveAdmin.register Entry do
       end
     end
 
-    def entry_params
-      params.require(:entry).permit(:event_id, :player_id)
-    end
-  end
-
-  index do
-    div do
-        link_to "Add Player", admin_add_entry_path(event_id: 2), method: :get
-    end
-
-    table_for Entry.order("created_at DESC") do
-      column :event
-      column :player do |entry|
-        entry.player.full_name
-      end
-      column :licence do |entry|
-        if entry.licence
-          "#{entry.licence.num} (#{entry.licence.club})"
-        else
-          "N/A"
+    def update
+      super do |format|
+        if resource.valid?
+          redirect_to admin_tour_event_path(resource.event.tour_id, resource.event_id) and return
         end
       end
-      column :status
-      column :created_at
-      column :updated_at
-      actions
     end
 
-
-
-    # table_for Player.all do |player|
-    #     column :id
-    #     column :full_name do |player|
-    #         player.full_name
-    #     end
-    #     column :my_licence do |player|
-    #         player.my_licence
-    #     end
-    #     column :my_club do |player|
-    #         player.my_club
-    #     end
-    #     column :age do |player|
-    #         player.age
-    #     end
-    #     column "Cat" do |player|
-    #         player.age_category
-    #     end
-    # end
+    private
+      def entry_params
+        params.require(:entry).permit(:event_id, :player_id, :status)
+      end
   end
 
   form do |f|
     f.inputs do
       f.input :event
-      f.input :player, collection: Player.order("lastname ASC").all.map { |p| [ p.full_name, p.id ] }
+      f.input :player
       if !f.object.new_record?
         f.input :licence, collection: Licence.where(player_id: f.object.player_id).order("num ASC").all.map { |l| [ "#{l.num} (#{l.club})", l.id ] }
       end

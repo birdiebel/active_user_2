@@ -13,6 +13,7 @@ ActiveAdmin.register Agecat do
   config.sort_order = "id_asc"
 
   index do
+    column "ID", :id
     column "Name" do |agecat|
       link_to agecat.name, admin_agecat_path(agecat), method: :get
     end
