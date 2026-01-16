@@ -14,6 +14,7 @@ ActiveAdmin.register Event do
   myTitle = proc { |event| "#{event.tour.name} : #{event.name}" }
   filter :name_cont, as: :string, label: "Name"
 
+  includes :entries, :playercats
 
 
   index do
@@ -104,13 +105,22 @@ ActiveAdmin.register Event do
       end
     end
 
-    panel "Entries : #{event.entries.count}" do
-      rstatus  = 1000
-      table_for event.entries.order("status ASC") do |entry|        
+    panel "Group" do 
+      # Grouper les entrées par statut
+      grouped_entries = resource.entries.group_by(&:status)
+
+      # Parcourir chaque statut et afficher une table pour chaque groupe
+      grouped_entries.each do |status, entries|
+        
+        div(class: "panel-table-subtitre") do 
+          "Status :  #{status.presence || 'Undefined'} : #{entries.count}"
+        end
+
+        table_for entries do
           column "CAT" do |entry|
             entry.player.icon_age_category
           end
-          column :player do |entry|
+          column do |entry|
             entry.player.full_name
           end
           column "Sexe" do |entry|
@@ -138,9 +148,10 @@ ActiveAdmin.register Event do
           end
           column "" do |entry|  
             button_to "Delete", admin_entry_path(entry), method: :delete, data: { confirm: "Are you sure?" }, class: "btt btt-cancel"
-          end  
-      end 
-    end
+          end            
+        end  
+      end  
+    end  
 
     panel "Player Categories" do
       table_for event.playercats do |playercat|
