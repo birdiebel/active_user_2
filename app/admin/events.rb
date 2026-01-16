@@ -107,7 +107,7 @@ ActiveAdmin.register Event do
 
     panel "Group" do 
       # Grouper les entrées par statut
-      grouped_entries = resource.entries.group_by(&:status)
+      grouped_entries = resource.entries.order(created_at: :desc).group_by(&:status)
 
       # Parcourir chaque statut et afficher une table pour chaque groupe
       grouped_entries.each do |status, entries|

@@ -11,7 +11,8 @@ class Entry < ApplicationRecord
     [ "event", "player", "licence", "playercat" ]
   end
 
-  enum :status, [ :enter, :refused, :canceled, :disqualified, :noshow ]
+  enum :status, { enter: 0, refused: 1, canceled: 2, disqualified: 3, noshow: 4 }
+  # enum :status, [ :enter, :refused, :canceled, :disqualified, :noshow ]
 
   after_save :add_licence_to_entry
 
