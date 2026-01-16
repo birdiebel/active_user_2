@@ -24,7 +24,7 @@ ActiveAdmin.register Tour do
       tour.status
     end
     column "" do |tour|
-      button_to "Edit", edit_admin_tour_path(tour), method: :get, class: "btn-edit"
+      button_to "Edit", edit_admin_tour_path(tour), method: :get, class: "btt btt-edit"
     end
   end
 
@@ -59,7 +59,7 @@ ActiveAdmin.register Tour do
           event.playercats.map(&:name).join(", ")
         end
         column "" do |event|
-          button_to "Edit", edit_admin_tour_event_path(tour, event), method: :get, class: "btn-edit"
+          button_to "Edit", edit_admin_tour_event_path(tour, event), method: :get, class: "btt btt-edit"
         end
       end
     end

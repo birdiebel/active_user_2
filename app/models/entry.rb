@@ -11,7 +11,7 @@ class Entry < ApplicationRecord
     [ "event", "player", "licence", "playercat" ]
   end
 
-  enum :status, [ :created, :confirmed, :paid, :canceled ]
+  enum :status, [ :enter, :refused, :canceled, :disqualified, :noshow ]
 
   after_save :add_licence_to_entry
 
@@ -25,6 +25,7 @@ class Entry < ApplicationRecord
       end
     end
     self.get_playercat
+    
   end
 
   def get_playercat
@@ -37,13 +38,17 @@ class Entry < ApplicationRecord
         if playercat.agecats.exists?
           if playercat.agecats.where("age_low <= ? AND age_high >= ?", age, age).exists?
             if playercat.hcp_min <= hcp && playercat.hcp_max >= hcp
-              self.update_column(:playercat_id, playercat.id)
-              return playercat
+                if player.sexe == playercat.sexe
+                  self.update_column(:playercat_id, playercat.id)
+                  return playercat
+                end 
             end
           end
         end
       end
     end
+    # No Catgory found
+    self.update_column(:status, "refused")
     nil
   end
 end

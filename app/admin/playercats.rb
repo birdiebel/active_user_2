@@ -29,7 +29,7 @@ ActiveAdmin.register Playercat do
     column "Priority", :priority
     column "Active", :actif
     column "" do |playercat|
-      button_to "Edit", edit_admin_playercat_path(playercat), method: :get, class: "btn-edit"
+      button_to "Edit", edit_admin_playercat_path(playercat), method: :get, class: "btt btt-edit"
     end
   end
 

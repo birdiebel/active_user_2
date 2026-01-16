@@ -33,7 +33,7 @@ ActiveAdmin.register Player do
     column "Club", :my_club
     column "Licences", :my_licence
     column "" do |player|
-      button_to "Edit", edit_admin_player_path(player), method: :get, class: "btn-edit"
+      button_to "Edit", edit_admin_player_path(player), method: :get, class: "btt btt-edit"
     end
   end
 
@@ -88,7 +88,7 @@ ActiveAdmin.register Player do
         column :club
         column :actif
         column "" do |licence|
-          button_to "Edit", edit_admin_player_licence_path(player, licence), method: :get, class: "btn-edit"
+          button_to "Edit", edit_admin_player_licence_path(player, licence), method: :get, class: "btt btt-edit"
         end
       end
     end

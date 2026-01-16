@@ -58,18 +58,22 @@ body.active_admin {
   font-size: 2em !important;
 }
 
-.btn-edit,
-btn-cancel {
+.btt {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0px;
   font-family: Arial;
-  color: #ffffff;
-  background: darkgreen;
   padding: 5px;
   text-decoration: none;
 }
-.btn-cancel {
+
+.btt-edit,
+btn-cancel {
+  color: #ffffff;
+  background: darkgreen;
+}
+.btt-cancel {
+  color: #ffffff;
   background: darkred;
 }
 

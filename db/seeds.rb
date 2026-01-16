@@ -123,6 +123,16 @@ def seed_playercats
     pc.agecats << Agecat.find_by(name: "Senior")
     pc.save
 
+    # Young Men
+    pc = go_playercat("Young Adult Men", 0, -5, 14.4, "2026", "White", 5, 0)
+    pc.agecats << Agecat.find_by(name: "Young Adult")
+    pc.save
+
+    # Young Ladies
+    pc = go_playercat("Young Adult Ladies", 1, -5, 14.4, "2026", "White", 6, 0)
+    pc.agecats << Agecat.find_by(name: "Young Adult")
+    pc.save
+
     # Futures Men
     pc = go_playercat("Future Men", 0, 14.5, 36.4, "2026", "Yellow", 3, 0)
     pc.agecats << Agecat.find_by(name: "Midam")
@@ -136,25 +146,25 @@ def seed_playercats
     pc.save
 
     # Team (bt) Serie 1 Men
-    pc = go_playercat("Team (bt) Serie 1 Men", 0, -5, 18.4, "2026", "White", 5, 1)
+    pc = go_playercat("Team (bt) Serie 1 Men", 0, -5, 18.4, "2026", "White", 7, 1)
     pc.agecats << Agecat.find_by(name: "Midam")
     pc.agecats << Agecat.find_by(name: "Senior")
     pc.save
 
     # Team (bt) Serie 1 Ladies
-    pc = go_playercat("Team (bt) Serie 1 Ladies", 1, -5, 18.4, "2026", "Blue", 6, 1)
+    pc = go_playercat("Team (bt) Serie 1 Ladies", 1, -5, 18.4, "2026", "Blue", 8, 1)
     pc.agecats << Agecat.find_by(name: "Midam")
     pc.agecats << Agecat.find_by(name: "Senior")
     pc.save
 
     # Team (bt) Serie 2 Men
-    pc = go_playercat("Team (bt) Serie 2 Men", 0, 18.5, 36.4, "2026", "Yellow", 7, 1)
+    pc = go_playercat("Team (bt) Serie 2 Men", 0, 18.5, 36.4, "2026", "Yellow", 9, 1)
     pc.agecats << Agecat.find_by(name: "Midam")
     pc.agecats << Agecat.find_by(name: "Senior")
     pc.save
 
     # Team (bt) Serie 2 Ladies
-    pc = go_playercat("Team (bt) Serie 2 Ladies", 1, 18.5, 36.4, "2026", "Red", 8, 1)
+    pc = go_playercat("Team (bt) Serie 2 Ladies", 1, 18.5, 36.4, "2026", "Red", 10, 1)
     pc.agecats << Agecat.find_by(name: "Midam")
     pc.agecats << Agecat.find_by(name: "Senior")
     pc.save
@@ -164,10 +174,10 @@ end
 # seed_players(50, 30)
 
 # # Seed Agecats
-seed_agecats
+# seed_agecats
 
 # Seed Playercats
 seed_playercats
 
 # Seed Tours and Events
-seed_tours("Federal Tour")
+# seed_tours("Federal Tour")

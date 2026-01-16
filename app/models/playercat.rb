@@ -12,4 +12,9 @@ class Playercat < ApplicationRecord
   enum :sexe, [ :Men, :Ladies ]
   enum :teebox, [ "Black", "White", "Yellow", "Blue", "Red" ]
   enum :format, [ :single, :team ]
+
+  def icon_teebox
+    tee_boxcolor = self.teebox.downcase
+    "<div class='bloc-teebox "+tee_boxcolor+"'></div>".html_safe
+  end
 end

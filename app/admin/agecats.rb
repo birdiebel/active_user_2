@@ -22,7 +22,7 @@ ActiveAdmin.register Agecat do
     column "Year", :year
     column "Color", :color
     column "" do |agecat|
-      button_to "Edit", edit_admin_agecat_path(agecat), method: :get, class: "btn-edit"
+      button_to "Edit", edit_admin_agecat_path(agecat), method: :get, class: "btt btt-edit"
     end
   end
 

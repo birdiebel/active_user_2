@@ -27,7 +27,7 @@ ActiveAdmin.register Event do
       event.playercats.map(&:name).join(", ")
     end
     column "" do |event|
-      button_to "Edit", edit_admin_tour_event_path(event.tour, event), method: :get, class: "btn-edit"
+      button_to "Edit", edit_admin_tour_event_path(event.tour, event), method: :get, class: "btt btt-edit"
     end
   end
 
@@ -68,6 +68,7 @@ ActiveAdmin.register Event do
                 tr do
                   th "Cat"
                   th "Nom complet"
+                  th "Genre"
                   th "Licence"
                   th "Club"
                   th "Âge"
@@ -79,6 +80,7 @@ ActiveAdmin.register Event do
                   tr do
                     td player.icon_age_category
                     td player.full_name # Remplacez `full_name` par la méthode appropriée pour afficher le nom complet.
+                    td player.sexe
                     td player.my_licence # Remplacez `my_licence` par l'attribut ou la méthode correspondant à la licence.
                     td player.my_club # Remplacez `my_club` par l'attribut ou la méthode correspondant au club.
                     td player.age # Remplacez `age` par l'attribut ou la méthode calculant l'âge.
@@ -103,35 +105,41 @@ ActiveAdmin.register Event do
     end
 
     panel "Entries : #{event.entries.count}" do
-      table_for event.entries.order("created_at DESC") do |entry|
-        column :id
-        column "CAT" do |entry|
-          entry.player.icon_age_category
-        end
-        column :player do |entry|
-          entry.player.full_name
-        end
-        column "Age" do |entry|
-          entry.player.age
-        end
-        column "Licence" do |entry|
-          entry.player.my_licence
-        end
-        column "Hcp" do |entry|
-          entry.hcp
-        end
-        column "Player Cat" do |entry|
-          entry.playercat ? entry.playercat.name : "N/A"
-        end
-        column "Club" do |entry|
-          entry.player.my_club
-        end
-        column :status
-        column :updated_at
-        column "" do |entry|
-          button_to "Edit", edit_admin_entry_path(entry), method: :get, class: "btn-edit"
-        end
-      end
+      rstatus  = 1000
+      table_for event.entries.order("status ASC") do |entry|        
+          column "CAT" do |entry|
+            entry.player.icon_age_category
+          end
+          column :player do |entry|
+            entry.player.full_name
+          end
+          column "Sexe" do |entry|
+            entry.player.sexe
+          end
+          column "Age" do |entry|
+            entry.player.age
+          end
+          column "Licence" do |entry|
+            entry.player.my_licence
+          end
+          column "Hcp" do |entry|
+            entry.hcp
+          end
+          column "Player Cat" do |entry|
+            entry.playercat ? entry.playercat.name : "N/A"
+          end
+          column "Club" do |entry|
+            entry.player.my_club
+          end
+          column :status
+          column :updated_at
+          column "" do |entry|
+            button_to "Edit", edit_admin_entry_path(entry), method: :get, class: "btt btt-edit"
+          end
+          column "" do |entry|  
+            button_to "Delete", admin_entry_path(entry), method: :delete, data: { confirm: "Are you sure?" }, class: "btt btt-cancel"
+          end  
+      end 
     end
 
     panel "Player Categories" do

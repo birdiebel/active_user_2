@@ -43,7 +43,7 @@ ActiveAdmin.register Course do
         column :slope
         column :rating
         column "" do |tee|
-          button_to "Edit", edit_admin_tee_path(tee), method: :get, class: "btn-edit"
+          button_to "Edit", edit_admin_tee_path(tee), method: :get, class: "btt btt-edit"
         end
       end
     end

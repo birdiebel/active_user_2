@@ -48,7 +48,7 @@ ActiveAdmin.register Club do
       link_to club.name, admin_club_path(club), method: :get
     end
     column "" do |club|
-      button_to "Edit", edit_admin_club_path(club), method: :get, class: "btn-edit"
+      button_to "Edit", edit_admin_club_path(club), method: :get, class: "btt btt-edit"
     end
   end
 
@@ -67,7 +67,7 @@ ActiveAdmin.register Club do
         column :version
         column :nb_hole
         column "" do |course|
-          button_to "Edit", edit_admin_club_course_path(club, course), method: :get, class: "btn-edit"
+          button_to "Edit", edit_admin_club_course_path(club, course), method: :get, class: "btt btt-edit"
         end
       end
     end
