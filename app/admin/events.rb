@@ -105,14 +105,13 @@ ActiveAdmin.register Event do
       end
     end
 
-    panel "Entries list" do 
+    panel "Entries list" do
       # Grouper les entrées par statut
       grouped_entries = resource.entries.order(status: :asc, created_at: :desc).group_by(&:status)
 
       # Parcourir chaque statut et afficher une table pour chaque groupe
       grouped_entries.each do |status, entries|
-        
-        div(class: "panel-table-subtitre") do 
+        div(class: "panel-table-subtitre") do
           "Status :  #{status.presence || 'Undefined'} : #{entries.count}"
         end
 
@@ -146,12 +145,12 @@ ActiveAdmin.register Event do
           column "" do |entry|
             button_to "Edit", edit_admin_entry_path(entry), method: :get, class: "btt btt-edit"
           end
-          column "" do |entry|  
+          column "" do |entry|
             button_to "Delete", admin_entry_path(entry), method: :delete, data: { confirm: "Are you sure?" }, class: "btt btt-cancel"
-          end            
-        end  
-      end  
-    end  
+          end
+        end
+      end
+    end
 
     panel "Player Categories" do
       table_for event.playercats do |playercat|

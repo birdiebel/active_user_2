@@ -16,10 +16,10 @@ ActiveAdmin.register Tour do
   member_action :copyevent, method: :post do
     event = Event.find(params[:id])
     new_event = event.amoeba_dup
-    new_event.name = "#{event.name} (Copy)" 
+    new_event.name = "#{event.name} (Copy)"
     new_event.save
     redirect_to admin_tour_path(event.tour), notice: "Event copied successfully."
-  end 
+  end
 
   index do
     column "Name" do |tour|
@@ -65,9 +65,9 @@ ActiveAdmin.register Tour do
           event.status
         end
         column "" do |event|
-          form_for [:admin, event], url: copyevent_admin_tour_path(event), method: :post do |f|
+          form_for [ :admin, event ], url: copyevent_admin_tour_path(event), method: :post do |f|
             f.submit "Copy Event", class: "btt btt-edit"
-          end  
+          end
         end
         column "" do |event|
           button_to "Edit", edit_admin_tour_event_path(tour, event), method: :get, class: "btt btt-edit"
