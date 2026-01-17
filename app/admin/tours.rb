@@ -13,6 +13,14 @@ ActiveAdmin.register Tour do
 
   filter :name_cont, as: :string, label: "Name"
 
+  member_action :copyevent, method: :post do
+    event = Event.find(params[:id])
+    new_event = event.amoeba_dup
+    new_event.name = "#{event.name} (Copy)" 
+    new_event.save
+    redirect_to admin_tour_path(event.tour), notice: "Event copied successfully."
+  end 
+
   index do
     column "Name" do |tour|
       link_to tour.name, admin_tour_path(tour), method: :get
@@ -48,6 +56,7 @@ ActiveAdmin.register Tour do
       end
 
       table_for tour.events do
+        column "ID", :id
         column "Name" do |event|
           link_to event.name, admin_tour_event_path(tour, event), method: :get
         end
@@ -55,8 +64,10 @@ ActiveAdmin.register Tour do
         column "Status" do |event|
           event.status
         end
-        column "Playercats" do |event|
-          event.playercats.map(&:name).join(", ")
+        column "" do |event|
+          form_for [:admin, event], url: copyevent_admin_tour_path(event), method: :post do |f|
+            f.submit "Copy Event", class: "btt btt-edit"
+          end  
         end
         column "" do |event|
           button_to "Edit", edit_admin_tour_event_path(tour, event), method: :get, class: "btt btt-edit"

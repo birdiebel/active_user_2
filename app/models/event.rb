@@ -13,6 +13,11 @@ class Event < ApplicationRecord
   enum :status, [ :created, :online, :registration, :waiting, :running, :terminated, :canceled ]
   enum :format, [ :single, :team ]
 
+  amoeba do
+    enable
+    include_associations :playercats
+  end
+
   def my_playercats(licence)
     player = licence.player
     hcp = licence.hcp
@@ -35,4 +40,16 @@ class Event < ApplicationRecord
       matched_playercats
     end
   end
+
+  def copy_record(new_name)
+    new_event = self.dup
+    new_event.name = new_name
+    new_event.status = :created
+    new_event.actif = false
+    new_event.save!
+    self.playercats.each do |pcat|
+      new_event.playercats << pcat
+    end
+    new_event
+  end 
 end

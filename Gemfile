@@ -72,3 +72,5 @@ gem "activeadmin"
 gem "devise"
 gem "jquery-rails"
 gem "faker"
+gem 'amoeba'
+

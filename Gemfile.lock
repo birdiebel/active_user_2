@@ -87,6 +87,8 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.8)
       public_suffix (>= 2.0.2, < 8.0)
+    amoeba (3.3.0)
+      activerecord (>= 5.2.0)
     arbre (1.7.0)
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
@@ -481,6 +483,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  amoeba
   bootsnap
   brakeman
   bundler-audit
@@ -525,6 +528,7 @@ CHECKSUMS
   activestorage (8.1.1) sha256=bc01d8b4c55e309a0a2e218bfe502c382c9f232e28b1f4b0adc9d8719d2bf28d
   activesupport (8.1.1) sha256=5e92534e8d0c8b8b5e6b16789c69dbea65c1d7b752269f71a39422e9546cea67
   addressable (2.8.8) sha256=7c13b8f9536cf6364c03b9d417c19986019e28f7c00ac8132da4eb0fe393b057
+  amoeba (3.3.0) sha256=f257313207228b56adfa84acdb83d24c6e710e46e13aed64b86f2fc9e8eaaf3b
   arbre (1.7.0) sha256=20c76c26390924422407aa8eb849ae859b903a95bb9c19eb2f8e05fe1e40c83d
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
