@@ -28,4 +28,64 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  hello: 'Hello world'
+date:
+  formats:
+    long: '%d-%m-%Y' # Example: 2026-01-18
+    short: '%d %b-%Y' # Example: Jan 18
+time:
+  formats:
+    long: '%d-%m-%Y %H:%M:%S' # Example: 2026-01-18 14:30:00
+    short: '%d %b %H:%M' # Example: 18 Jan 14:30
+  am: 'AM'
+  pm: 'PM'
+  day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+  abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+  month_names:
+    - ~
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+  abbr_month_names:
+    - ~
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+  order:
+    - :day
+    - :month
+    - :year
+  formats:
+    default: '%a %b %d %H:%M:%S %Z %Y' # Example: Sat Jan 18 14:30:00 UTC 2026

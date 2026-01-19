@@ -7,7 +7,7 @@ class Event < ApplicationRecord
     [ "tour" ]
   end
   def self.ransackable_attributes(auth_object = nil)
-    [ "actif", "created_at", "id", "name", "status", "tour_id", "updated_at", "format" ]
+    [ "actif", "created_at", "id", "name", "status", "tour_id", "updated_at", "format", "date_event", "date_open", "date_close", "nb_rounds" ]
   end
 
   enum :status, [ :created, :online, :registration, :waiting, :running, :terminated, :canceled ]
@@ -51,5 +51,5 @@ class Event < ApplicationRecord
       new_event.playercats << pcat
     end
     new_event
-  end 
+  end
 end

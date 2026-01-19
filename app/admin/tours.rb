@@ -64,9 +64,22 @@ ActiveAdmin.register Tour do
         column "Status" do |event|
           event.status
         end
+        column "date_event" do |event|
+          l(event.date_event, format: :short) if event.date_event
+        end
+        column "date_open" do |event|
+          l(event.date_open, format: :short) if event.date_open
+        end
+        column "date_close" do |event|
+          l(event.date_close, format: :short) if event.date_close
+        end
+        column "nb_rounds" do |event|
+          event.nb_rounds
+        end
         column "" do |event|
           form_for [ :admin, event ], url: copyevent_admin_tour_path(event), method: :post do |f|
-            f.submit "Copy Event", class: "btt btt-edit"
+            # f.submit "Copy Event", class: "btt btt-edit"
+            f.submit "Copy", button_html: { class: "submit-button", style: "background-color: blue;" }
           end
         end
         column "" do |event|

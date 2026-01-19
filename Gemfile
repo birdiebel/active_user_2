@@ -73,3 +73,8 @@ gem "devise"
 gem "jquery-rails"
 gem "faker"
 gem "amoeba"
+gem "rails-i18n"
+
+group :development do
+  gem "rails_live_reload"
+end

@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
   belongs_to :tour
   includes :tour
 
-  permit_params :name, :status, :actif, :tour_id, :format, playercat_ids: []
+  permit_params :name, :status, :actif, :tour_id, :format, :date_event, :date_open, :date_close, :nb_rounds, playercat_ids: []
 
   menu false
   config.batch_actions = false
@@ -177,6 +177,11 @@ ActiveAdmin.register Event do
       f.input :format, as: :select, collection: Event.formats.keys
       f.input :status, as: :select, collection: Event.statuses.keys
       f.input :actif
+      # f.input :date_event, as: :datepicker, datepicker_options: { dateFormat: "dd/mm/yy" }
+      f.input :date_event, as: :datepicker, input_html: { value: f.object.date_event&.strftime("%m/%d/%Y") }, datepicker_options: { dateFormat: "dd/mm/yy" }
+      f.input :date_open, as: :datepicker, input_html: { value: f.object.date_open&.strftime("%m/%d/%Y") }, datepicker_options: { dateFormat: "dd/mm/yy" }
+      f.input :date_close, as: :datepicker, input_html: { value: f.object.date_close&.strftime("%m/%d/%Y") }, datepicker_options: { dateFormat: "dd/mm/yy" }
+      f.input :nb_rounds, as: :number
       f.input :playercats, as: :check_boxes, collection: Playercat.all.map { |pc| [ pc.name, pc.id ] }
     end
     f.actions do
