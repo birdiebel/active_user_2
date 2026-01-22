@@ -20,7 +20,7 @@ ActiveAdmin.register_page "addtest" do
     else
       Entry.create!(player: player, event: event)
       redirect_to admin_add_entry_path(event_id: event.id),
-                  notice: "Entry créée pour #{player.firstname} #{player.lastname}"
+      notice: "Entry créée pour #{player.firstname} #{player.lastname}"
     end
   end
 

@@ -40,7 +40,7 @@ ActiveAdmin.register Entry do
       f.input :playercat, collection: f.object.event.playercats.all.map { |pc| [ pc.name, pc.id ] }
       f.input :status
     end
-    f.actions do 
+    f.actions do
       f.action :submit
       f.cancel_link(url_for(:back))
     end

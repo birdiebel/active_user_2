@@ -32,5 +32,11 @@
   "rubyLsp.formatter": "rubocop",
   "editor.semanticHighlighting.enabled": true,
   "editor.formatOnSave": true,
-  "editor.formatOnType": true
+  "editor.formatOnType": true,
+  "[erb]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
 }

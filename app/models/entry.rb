@@ -26,7 +26,6 @@ class Entry < ApplicationRecord
       end
     end
     self.get_playercat
-    
   end
 
   def get_playercat
@@ -42,7 +41,7 @@ class Entry < ApplicationRecord
                 if player.sexe == playercat.sexe
                   self.update_column(:playercat_id, playercat.id)
                   return playercat
-                end 
+                end
             end
           end
         end
